@@ -1,29 +1,10 @@
 import { buildCatalog } from './scraping.js';
-import fs from 'fs';
-import path from 'path';
 import dotenv from "dotenv";
-
+import { writeFile } from './utils/index.js';
 dotenv.config();
 
-const __filename = new URL(import.meta.url).pathname;
-const __dirname = path.dirname(__filename);
 
-const writeFile = (supermarket = 'Nacional', report) => {
 
-    const filepath = path.join(__dirname, 'files', supermarket + '.json');
-
-    fs.writeFile(filepath, JSON.stringify(report), error => {
-
-        if (error) {
-            console.error(`Error Writting file for: ${supermarket}`, error)
-            return;
-        }
-
-        console.log('Wrote file for ', supermarket)
-
-    })
-
-}
 
 async function main() {
     const root_url = "https://supermercadosnacional.com/"

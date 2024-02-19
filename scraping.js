@@ -60,7 +60,7 @@ async function parseEndpoint(endpoint) {
     return products
 }
 
-async function safeRequest(url, retries = 3, delay = 1000) {
+export async function safeRequest(url, retries = 3, delay = 1000) {
     let lastError;
     for (let i = 0; i < retries; i++) {
         try {

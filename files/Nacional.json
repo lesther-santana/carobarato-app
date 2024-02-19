@@ -390,7 +390,7 @@
     },
     {
       "name": "Hamburguesa con Tocineta Brangus 4 Und/Paq",
-      "price": "399.96$499.95",
+      "price": "499.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2213990-1.jpg",
       "brand": "BRANGUS"
     },
@@ -408,13 +408,13 @@
     },
     {
       "name": "Hamburguesa Angus Premium 6 Und/Paq",
-      "price": "559.96$699.95",
+      "price": "699.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2171018-1.jpg",
       "brand": "CASERO"
     },
     {
       "name": "Hamburguesa Con Queso Cheddar Brangus 4 Und/Paq",
-      "price": "399.96$499.95",
+      "price": "499.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2195575-1.jpg",
       "brand": "BRANGUS"
     },
@@ -426,7 +426,7 @@
     },
     {
       "name": "Hamburguesa Clasica Brangus 4 Und/Paq",
-      "price": "399.96$499.95",
+      "price": "499.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2194817-1.jpg",
       "brand": "BRANGUS"
     },
@@ -452,31 +452,31 @@
     },
     {
       "name": "Salchicha Parrillera Jalaeño El Criollo 450 Gr",
-      "price": "183.96$229.95",
+      "price": "229.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2210069-1__1702497926.jpg",
       "brand": "EL CRIOLLO"
     },
     {
       "name": "Salchicha Parrilera Estilo Alemana El Criollo 450 Gr",
-      "price": "183.96$229.95",
+      "price": "229.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2210066-1__1702481132.jpg",
       "brand": "EL CRIOLLO"
     },
     {
       "name": "Salchicha Italiana Chorizo El Criollo 450 Gr",
-      "price": "183.96$229.95",
+      "price": "229.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2210068-1__1702481130.jpg",
       "brand": "EL CRIOLLO"
     },
     {
       "name": "Salchicha Cebolla y Pimientos El Criollo 450 Gr",
-      "price": "183.96$229.95",
+      "price": "229.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2210067-1__1702481129.jpg",
       "brand": "EL CRIOLLO"
     },
     {
       "name": "Salchicha Parrillera El Criollo 450 Gr",
-      "price": "183.96$229.95",
+      "price": "229.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2210062-1__1702481127.jpg",
       "brand": "EL CRIOLLO"
     },
@@ -612,7 +612,7 @@
     },
     {
       "name": "Tartar de Salmón Gimar 100 Gr",
-      "price": "549.95",
+      "price": "439.95$549.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221776-1__1700660730.jpg",
       "brand": "GIMAR"
     },
@@ -635,7 +635,7 @@
       "brand": "MANUEL CLAROS"
     },
     {
-      "name": "Salmón Ahumado Sooker 100 Gr",
+      "name": "Salmón Ahumado Sokker 100 Gr",
       "price": "499.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2073523-1.jpg",
       "brand": "COPESCO ROYAL"
@@ -692,7 +692,7 @@
     },
     {
       "name": "Camarón Crudo 26/30 Congelado Cape Covelle 1 Lb",
-      "price": "549.95",
+      "price": "439.96$549.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2207779-1.jpg",
       "brand": "CAPE COVELLE"
     },
@@ -728,13 +728,13 @@
     },
     {
       "name": "Camarón Precocido 41/50 Congelado Cape Covelle 1 Lb",
-      "price": "649.95",
+      "price": "519.96$649.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2169467-1.jpg",
       "brand": "CAPE COVELLE"
     },
     {
       "name": "Camarón Precocido 71/90 Congelado Cape Covelle 1 Lb",
-      "price": "599.95",
+      "price": "479.96$599.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2168885-1.jpg",
       "brand": "CAPE COVELLE"
     }
@@ -1584,7 +1584,7 @@
     },
     {
       "name": "Batata Roja, Lb",
-      "price": "28.95",
+      "price": "27.00",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2211736-1.jpg",
       "brand": "NACIONAL"
     },
@@ -2006,7 +2006,7 @@
     },
     {
       "name": "Bebida de Soya Barista Natur All 1 Lt",
-      "price": "149.95",
+      "price": "127.46$149.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221216-1__1703884533.jpg",
       "brand": "NATUR ALL"
     },
@@ -2054,13 +2054,13 @@
     },
     {
       "name": "Bebida de Almendra Barista Natur All 1 Lt",
-      "price": "194.95",
+      "price": "165.71$194.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221218-1__1692644529.jpg",
       "brand": "NATUR ALL"
     },
     {
       "name": "Bebida de Avena Barista Natur All 1 Lt",
-      "price": "194.95",
+      "price": "165.71$194.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221217-1__1692644528.jpg",
       "brand": "NATUR ALL"
     }
@@ -2319,6 +2319,12 @@
       "brand": "YOKI"
     },
     {
+      "name": "Yogurt Bebible Sabor Uva Yoki 5 Onz",
+      "price": "24.95$32.95",
+      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2189824-1.jpg",
+      "brand": "YOKI"
+    },
+    {
       "name": "Yogurt Bebible Sabor Chicle Yoki 5 Onz",
       "price": "24.95$32.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2189823-1.jpg",
@@ -2353,12 +2359,6 @@
       "price": "33.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2169105-1.jpg",
       "brand": "YOPLI"
-    },
-    {
-      "name": "Yogurt Bebible Sabor Guanabana Yopsi 32 Onz",
-      "price": "138.95$149.95",
-      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2169103-1.jpg",
-      "brand": "YOPSI"
     }
   ],
   "/lacteos-y-huevos/yogurt/yogurt-de-base-vegetal": [
@@ -2400,7 +2400,7 @@
     },
     {
       "name": "Yogurt De Leche De Coco Plain So Delicious 24 Onz",
-      "price": "409.95$459.95",
+      "price": "459.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2214197-1.jpg",
       "brand": "SO DELICIUS"
     },
@@ -2518,7 +2518,7 @@
     },
     {
       "name": "Margarina Untable Lider 400 Gr",
-      "price": "84.95$99.95",
+      "price": "99.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2209432-1.jpg",
       "brand": "LIDER"
     },
@@ -2684,7 +2684,7 @@
     },
     {
       "name": "Crema De Leche 35% Grasa Elle & Vire 20 Cl",
-      "price": "149.95",
+      "price": "119.95$149.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2066082-1.jpg",
       "brand": "ELLE & VIRE"
     },
@@ -2728,7 +2728,7 @@
     },
     {
       "name": "Nata Para Montar Asturiana 500 Ml",
-      "price": "269.95",
+      "price": "214.95$269.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2191581-1.jpg",
       "brand": "ASTURIANA"
     },
@@ -2901,15 +2901,15 @@
       "brand": "HUEVOS DEL CAMPO"
     },
     {
-      "name": "Huevos Camperos Marrones Rancho España 12 Und/Paq",
-      "price": "159.95",
-      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2173123-1.jpg",
-      "brand": "RANCHO ESPAÑA"
-    },
-    {
       "name": "Huevos Marrones Grandes Ecocampo 12 Und/1Paq",
       "price": "114.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2216429-1__1697215530.jpg",
+      "brand": "ECOCAMPO"
+    },
+    {
+      "name": "Huevos Marrones Omega 3 DHA Ecocampo 6 Und/Paq",
+      "price": "69.95",
+      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2216428-1__1697215529.jpg",
       "brand": "ECOCAMPO"
     }
   ],
@@ -2944,7 +2944,7 @@
     },
     {
       "name": "Pasta Ravioli Hongos Rana 10 Onz",
-      "price": "369.95$389.95",
+      "price": "389.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2136503-1.jpg",
       "brand": "RANA"
     },
@@ -3012,7 +3012,7 @@
   "/lacteos-y-huevos/masas-y-pastas-refrigeradas/masas-refrigeradas": [
     {
       "name": "Masa Refrigerada Para Hawaiian Crescent Rolls Food Club 8 Onz",
-      "price": "159.95$199.95",
+      "price": "199.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2209563-1.jpg",
       "brand": "FOOD CLUB"
     },
@@ -3128,7 +3128,7 @@
     },
     {
       "name": "Cream Cheese Con Ajo Sin Lactosa Arla 200 Gr",
-      "price": "149.95$184.95",
+      "price": "139.95$184.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2220674-1.jpg",
       "brand": "ARLA"
     },
@@ -3163,6 +3163,12 @@
       "price": "289.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2161321-1.jpg",
       "brand": "BELGIOSO"
+    },
+    {
+      "name": "Queso Cottage Bajo En Grasa Food Club 16 Onz",
+      "price": "189.95",
+      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2134554-1.jpg",
+      "brand": "FOOD CLUB"
     },
     {
       "name": "Queso Ricotta Salata Ovina Auricchio, Lb",
@@ -3210,12 +3216,6 @@
       "name": "Queso Cotagge Con Blueberries Daisy 6 Onz",
       "price": "219.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2223115-1__1703884539.jpg",
-      "brand": "DAISY"
-    },
-    {
-      "name": "Queso Cotagge Con Piña Daisy 6 Onz",
-      "price": "219.95",
-      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2223114-1__1703884538.jpg",
       "brand": "DAISY"
     }
   ],
@@ -3355,16 +3355,16 @@
       "brand": "KRAFT"
     },
     {
-      "name": "Burrata Bonta Viva 100 Gr",
-      "price": "249.95",
-      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2213431-1.jpg",
-      "brand": "BONTA VIVA"
-    },
-    {
       "name": "Queso Provolone Fuerte Boar'S Head®, Lb",
       "price": "424.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2197552-1.jpg",
       "brand": "BOAR'S HEAD"
+    },
+    {
+      "name": "Queso Mozzarella Imitacion Rallado That'S Smart 8 Onz",
+      "price": "129.95",
+      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2196723-1.jpg",
+      "brand": "THAT'S SMART"
     }
   ],
   "/quesos-y-embutidos/quesos/queso-brie-y-camembert": [
@@ -3542,7 +3542,7 @@
     },
     {
       "name": "Queso Gorgonzola D.O.P. Auricchio Lb",
-      "price": "379.95$449.95",
+      "price": "449.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2129432-1.jpg",
       "brand": "AURICCHIO"
     },
@@ -3640,7 +3640,7 @@
     },
     {
       "name": "Queso Mexican Blend Shredded Food Club 8 Onz",
-      "price": "184.95",
+      "price": "159.95$184.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2082407-1.jpg",
       "brand": "FOOD CLUB"
     }
@@ -3918,7 +3918,7 @@
     },
     {
       "name": "Queso Tierno Sin Lactosa El Ventero 140 Gr",
-      "price": "229.95",
+      "price": "184.95$229.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2175200-1.jpg",
       "brand": "EL VENTERO"
     },
@@ -4172,7 +4172,7 @@
     },
     {
       "name": "Pechuga de pollo Rostizado Rebanado Boar's Head 8 Onz",
-      "price": "454.95",
+      "price": "399.95$454.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219263-1__1702313131.jpg",
       "brand": "BOAR'S HEAD"
     },
@@ -4202,7 +4202,7 @@
     },
     {
       "name": "Pechuga de Pollo Firesmith Boar's Head, Lb",
-      "price": "604.95",
+      "price": "484.95$604.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219977-1.jpg",
       "brand": "BOAR'S HEAD"
     },
@@ -4320,7 +4320,7 @@
     },
     {
       "name": "Salami Super Especial Lider 1 Lb",
-      "price": "119.95",
+      "price": "104.95$119.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221044-1__1692049548.JPG",
       "brand": "LIDER"
     },
@@ -4406,7 +4406,7 @@
     },
     {
       "name": "Salchicha Sopressata Rebanado Boar's Head 4 Onz",
-      "price": "339.95",
+      "price": "299.95$339.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219225-1__1702313120.jpg",
       "brand": "BOAR'S HEAD"
     },
@@ -4468,7 +4468,7 @@
     },
     {
       "name": "Tocineta Extra Gruesa Ahumada Boar's Head® 20 Onz",
-      "price": "599.95",
+      "price": "539.95$599.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2208970-1.jpg",
       "brand": "BOAR'S HEAD"
     },
@@ -4510,13 +4510,13 @@
     },
     {
       "name": "Tocineta Ahumada Maple Y Azucar Morena Boar'S Head®, 12 Oz",
-      "price": "389.95$444.95",
+      "price": "444.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2208968-1.jpg",
       "brand": "BOAR'S HEAD"
     },
     {
       "name": "Tocineta Ahumada Tradicional Boar'S Head®, 16 Oz",
-      "price": "439.95",
+      "price": "409.95$439.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2208967-1.jpg",
       "brand": "BOAR'S HEAD"
     },
@@ -4610,7 +4610,7 @@
     },
     {
       "name": "Roast Beef London Broil Boar'S Head®, Lb",
-      "price": "819.95",
+      "price": "739.95$819.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2195181-1.jpg",
       "brand": "BOAR'S HEAD"
     },
@@ -4630,7 +4630,7 @@
   "/quesos-y-embutidos/charcuteria-y-embutidos/chorizo-y-morcilla": [
     {
       "name": "Chorizo Parrillero El Criollo 450 Gr",
-      "price": "183.96$229.95",
+      "price": "229.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2210070-1__1702481131.jpg",
       "brand": "EL CRIOLLO"
     },
@@ -4710,7 +4710,7 @@
     },
     {
       "name": "Salchicha Parrilera Tradicional El Criollo 450 Gr",
-      "price": "183.96$229.95",
+      "price": "229.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2210065-1__1702481128.jpg",
       "brand": "EL CRIOLLO"
     },
@@ -4734,7 +4734,7 @@
     },
     {
       "name": "Salchicha De Pollo Chorizo Boar'S Head®, 12 Oz",
-      "price": "339.95$399.95",
+      "price": "399.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2206631-1.jpg",
       "brand": "BOAR'S HEAD"
     },
@@ -4974,19 +4974,19 @@
     },
     {
       "name": "Hummus De Espinaca Y Alcachofa Boar'S Head® 10 Onz",
-      "price": "254.95",
+      "price": "229.95$254.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2200994-1.jpg",
       "brand": "BOAR'S HEAD"
     },
     {
       "name": "Dip Griego French Onion Boar'S Head® 12 Onz",
-      "price": "234.95$274.95",
+      "price": "274.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2213828-1.jpg",
       "brand": "BOAR'S HEAD"
     },
     {
       "name": "Hummus Sweet Chili Garlic Boar'S Head® 10 Onz",
-      "price": "254.95",
+      "price": "214.95$254.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2213556-1.jpg",
       "brand": "BOAR'S HEAD"
     },
@@ -5042,7 +5042,7 @@
     },
     {
       "name": "Pan de Viga Sobao Holsum",
-      "price": "209.95",
+      "price": "189.95$209.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219223-1.jpg",
       "brand": "HOLSUM"
     },
@@ -5344,19 +5344,19 @@
     },
     {
       "name": "Bagels Integrales Toufayan 20 Onz",
-      "price": "129.95$169.95",
+      "price": "169.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2100674-1.jpg",
       "brand": "TOUFAYAN"
     },
     {
       "name": "Bagels Sabor Blueberry Toufayan 20 Onz",
-      "price": "129.95$169.95",
+      "price": "169.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2100673-1.jpg",
       "brand": "TOUFAYAN"
     },
     {
       "name": "Bagels Plain Toufayan 20 Onz",
-      "price": "129.95$169.95",
+      "price": "169.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2099903-1.jpg",
       "brand": "TOUFAYAN"
     },
@@ -5370,7 +5370,7 @@
   "/panaderia-y-reposteria/panaderia/pan-artesanal": [
     {
       "name": "Pan de Cebolla La Panera 140 Gr",
-      "price": "39.95$47.95",
+      "price": "47.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2169701-1__1694037923.jpg",
       "brand": "LA PANERA"
     },
@@ -5927,12 +5927,6 @@
   ],
   "/panaderia-y-reposteria/reposteria/postres-refrigerados": [
     {
-      "name": "Crema Catalana Pastoret 150 Gr",
-      "price": "239.95$299.95",
-      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2220778-1__1698759928.jpg",
-      "brand": "PASTORET"
-    },
-    {
       "name": "Bizcocho De Chocolate Relleno Sin Gluten Katz 8.8 Onz",
       "price": "459.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2223069-1__1694462724.jpg",
@@ -5997,6 +5991,12 @@
       "price": "49.95$53.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2096103-1.jpg",
       "brand": "GOYA"
+    },
+    {
+      "name": "Pudding De Chocolate Triple Swiss Miss 6 Onz C/U",
+      "price": "369.95",
+      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2076112-1.jpg",
+      "brand": "SWISS MISS"
     }
   ],
   "/panaderia-y-reposteria/reposteria/dulces-artesanales": [
@@ -6545,13 +6545,13 @@
     },
     {
       "name": "Waffles De Blueberry Sin Gluten Van'S 8 Onz",
-      "price": "359.95",
+      "price": "299.95$359.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2170955-1.jpg",
       "brand": "VANS"
     },
     {
       "name": "Waffles Sin Gluten Van'S 9 Onz",
-      "price": "359.95",
+      "price": "299.95$359.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2170954-1.jpg",
       "brand": "VANS"
     },
@@ -7213,25 +7213,25 @@
   "/congelados/comida-congelada/pizzas-y-pastas-congeladas": [
     {
       "name": "Pizza Jamon, Bacon Y Queso Palacios 360 Gr",
-      "price": "204.95$269.95",
+      "price": "269.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2141326-1__1707162924.jpg",
       "brand": "PALACIOS"
     },
     {
       "name": "Pizza Barbacoa Palacios 400 Gr",
-      "price": "219.95$289.95",
+      "price": "289.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2122184-1__1707162923.jpg",
       "brand": "PALACIOS"
     },
     {
       "name": "Pizza de Pepperoni Ciro's 250 Gr",
-      "price": "194.95$239.95",
+      "price": "239.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2217522-1__1706910924.jpg",
       "brand": "DE AQUI CON CORAZON"
     },
     {
       "name": "Pizza Margarita Ciro's 250 Gr",
-      "price": "164.95$204.95",
+      "price": "204.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2217521-1__1706910923.jpg",
       "brand": "DE AQUI CON CORAZON"
     },
@@ -7323,13 +7323,13 @@
     },
     {
       "name": "Albondigas Italianas Food Club 26 Onz",
-      "price": "189.95$499.95",
+      "price": "199.95$499.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2220353-1__1694189722.jpg",
       "brand": "FOOD CLUB"
     },
     {
       "name": "Albondigas Homestyle Food Club 26 Onz",
-      "price": "189.95$499.95",
+      "price": "199.95$499.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2220352-1__1694189721.jpg",
       "brand": "FOOD CLUB"
     },
@@ -7589,61 +7589,61 @@
     },
     {
       "name": "Snack de Datiles Con Cereza y Cacao Good Calories 58 Gr",
-      "price": "103.96$129.95",
+      "price": "129.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221058-1__1705416331.jpg",
       "brand": "GOOD CALORIES"
     },
     {
       "name": "Mini Barritas De Blueberry Sin Azúcar Good Calories 102 Gr",
-      "price": "159.96$199.95",
+      "price": "199.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221071-1__1704890125.jpg",
       "brand": "GOOD CALORIES"
     },
     {
       "name": "Mini Barritas De Frambuesa Good Calories 102 Gr",
-      "price": "159.96$199.95",
+      "price": "199.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221050-1__1704890124.jpg",
       "brand": "GOOD CALORIES"
     },
     {
       "name": "Snack Bites de Datiles Con Naranja y Cacao Sin Azúcar Good Calories 65 Gr",
-      "price": "103.96$129.95",
+      "price": "129.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221060-1__1704890123.jpg",
       "brand": "GOOD CALORIES"
     },
     {
       "name": "Barra de Proteína de Maní y Datiles Con Coco Good Calories 45 Gr",
-      "price": "39.96$49.95",
+      "price": "49.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221054-1__1704890122.jpg",
       "brand": "GOOD CALORIES"
     },
     {
       "name": "Snack de Avena Con Chocolate Negro Sin Azúcar Good Calories 32 Gr",
-      "price": "63.96$79.95",
+      "price": "79.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221061-1__1704746742.jpg",
       "brand": "GOOD CALORIES"
     },
     {
       "name": "Barra de Proteína de Maní y Sal Good Calories 45 Gr",
-      "price": "55.96$69.95",
+      "price": "69.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221057-1__1704746741.jpg",
       "brand": "GOOD CALORIES"
     },
     {
       "name": "Barra de Proteína de Maní y Datiles Con Vainilla Good Calories 45 Gr",
-      "price": "55.96$69.95",
+      "price": "69.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221056-1__1704746740.jpg",
       "brand": "GOOD CALORIES"
     },
     {
       "name": "Barra de Granola De Manzana y Canela Sin Azúcar Good Calories 35 Gr",
-      "price": "39.96$49.95",
+      "price": "49.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221055-1__1704746739.jpg",
       "brand": "GOOD CALORIES"
     },
     {
       "name": "Snack de Maní con Miel Tostado Good Calories 32 Gr",
-      "price": "63.96$79.95",
+      "price": "79.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221049-1__1704746738.jpg",
       "brand": "GOOD CALORIES"
     },
@@ -7749,13 +7749,13 @@
     },
     {
       "name": "Fecula De Maiz Maizena Duryea 425 Gr",
-      "price": "104.95$122.95",
+      "price": "104.95$124.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2191344-1.jpg",
       "brand": "DURYEA"
     },
     {
       "name": "Harina El Negrito 16 Onz",
-      "price": "134.95$147.95",
+      "price": "134.95$148.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2146417-1.jpg",
       "brand": "NEGRITO"
     },
@@ -7959,7 +7959,7 @@
     },
     {
       "name": "Sirop Para Pancakes Keto Birch Bender 13 Onz",
-      "price": "499.95",
+      "price": "429.95$499.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2220844-1__1701980131.jpg",
       "brand": "BIRCH BENDER"
     },
@@ -8515,13 +8515,13 @@
     },
     {
       "name": "Trozos De Pulpo En Aceite Renna 150 Gr",
-      "price": "499.95",
+      "price": "399.95$499.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219989-1.jpg",
       "brand": "RENNA"
     },
     {
       "name": "Sepias En Aceite De Girasol Renna 150 Gr",
-      "price": "449.95",
+      "price": "359.95$449.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219986-1.jpg",
       "brand": "RENNA"
     },
@@ -9921,6 +9921,12 @@
       "brand": "HUNTS"
     },
     {
+      "name": "Salsa Para Pasta Tradicional Sin Azucar Food Club 23.5 Onz",
+      "price": "199.95",
+      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2220522-1__1693673121.JPG",
+      "brand": "FOOD CLUB"
+    },
+    {
       "name": "Salsa de Tomate Para Pasta Al Pesto Toscana Carozzi 200 Gr",
       "price": "89.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221232-1.jpg",
@@ -9936,12 +9942,6 @@
       "name": "Salsa de Tomates para Pasta Toscana Arrabiata Carozzi 200 Gr",
       "price": "89.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221234-1.jpg",
-      "brand": "CAROZZI"
-    },
-    {
-      "name": "Salsa de Tomate Para Pasta Toscana Bolognesa Carozzi 200 Gr",
-      "price": "89.95",
-      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221231-1.jpg",
       "brand": "CAROZZI"
     }
   ],
@@ -10694,7 +10694,7 @@
     },
     {
       "name": "Aceite De Soya Lider 3 Lt",
-      "price": "379.95$394.95",
+      "price": "394.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219839-1__1699709130.jpg",
       "brand": "LIDER"
     },
@@ -10724,7 +10724,7 @@
     },
     {
       "name": "Aceite Criollo Crisol 96 Onz",
-      "price": "462.36$577.95",
+      "price": "534.95$577.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2203762-1.jpg",
       "brand": "CRISOL"
     },
@@ -11604,19 +11604,19 @@
     },
     {
       "name": "Snack de Yuca Frita Salada Inka 130 Gr",
-      "price": "109.95$129.95",
+      "price": "129.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2224353-1__1706372128.jpg",
       "brand": "INKA"
     },
     {
       "name": "Chips de Batata Salada Inka 130 Gr",
-      "price": "94.95$109.95",
+      "price": "109.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2224352-1__1706372127.jpg",
       "brand": "INKA"
     },
     {
       "name": "Tostones Con Sal Marina Inka 100 Gr",
-      "price": "99.95$119.95",
+      "price": "119.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2224349-1__1706372126.jpg",
       "brand": "INKA"
     },
@@ -11666,13 +11666,13 @@
   "/despensa/picaderas/semillas-frutos-secos-y-deshidratados": [
     {
       "name": "Snack de Maiz Gigante Salado Inka 100 Gr",
-      "price": "84.95$99.95",
+      "price": "99.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2224347-1__1706372125.jpg",
       "brand": "INKA"
     },
     {
       "name": "Snack de Maiz Gigante Chile Picante Inka 100 Gr",
-      "price": "84.95$99.95",
+      "price": "99.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2224348-1__1706372124.jpg",
       "brand": "INKA"
     },
@@ -11879,10 +11879,10 @@
       "brand": "LIDER"
     },
     {
-      "name": "Palomitas De Maíz Dulce Sabor A Maní Kopcaleca 175 Gr",
-      "price": "224.95",
-      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2204379-1.jpg",
-      "brand": "KOPCALECA"
+      "name": "Palomitas De Maiz Con Sea Salt Lider 100 Gr",
+      "price": "79.95",
+      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2204716-1.jpg",
+      "brand": "LIDER"
     }
   ],
   "/despensa/picaderas/salsas-y-dips": [
@@ -12596,7 +12596,7 @@
     },
     {
       "name": "Mezcla Para Muffin De Maiz Food Club 7.5 Onz",
-      "price": "64.95$79.95",
+      "price": "79.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2190832-1.jpg",
       "brand": "FOOD CLUB"
     },
@@ -13276,13 +13276,13 @@
     },
     {
       "name": "Agua Con Gas Zero Sabor Naranja San Benedetto 400 Ml",
-      "price": "59.96$74.95",
+      "price": "74.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221441-1__1696460721.jpg",
       "brand": "SAN BENEDETTO"
     },
     {
       "name": "Agua Con Gas Zero Sabor Frutos Rojos San Benedetto 400 Ml",
-      "price": "59.96$74.95",
+      "price": "74.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221442-1__1696460720.jpg",
       "brand": "SAN BENEDETTO"
     },
@@ -13326,7 +13326,7 @@
     },
     {
       "name": "Refresco Sabor Naranja Country Club 2 Lt",
-      "price": "63.96$79.95",
+      "price": "64.95$79.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2215968-1__1707333923.jpg",
       "brand": "COUNTRY CLUB"
     },
@@ -13666,13 +13666,13 @@
   "/bebidas/energizantes-y-bebidas-hidratantes/bebidas-hidratantes": [
     {
       "name": "Bebida Rehidratante Sabor Uva Suerox 630 Ml",
-      "price": "194.95",
+      "price": "155.96$194.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2223318-1__1703691323.jpg",
       "brand": "SUEROX"
     },
     {
       "name": "Bebida Rehidratante Sabor Naranja y Mandarina Suerox 630 Ml",
-      "price": "194.95",
+      "price": "155.96$194.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2223316-1__1703691322.jpg",
       "brand": "SUEROX"
     },
@@ -13696,37 +13696,37 @@
     },
     {
       "name": "Bebida Hidratante Sabor Cereza & Limón Gatorlyte 591 Ml",
-      "price": "134.95$149.95",
+      "price": "119.96$149.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219534-1.jpg",
       "brand": "GATORADE"
     },
     {
       "name": "Bebida Hidratante Sabor Fresa & Kiwi Gatorlyte 591 Ml",
-      "price": "134.95$149.95",
+      "price": "119.96$149.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219533-1.jpg",
       "brand": "GATORADE"
     },
     {
       "name": "Bebida Hidratante Sabor Naranja Gatorlyte 591 Ml",
-      "price": "134.95$149.95",
+      "price": "119.96$149.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219532-1.jpg",
       "brand": "GATORADE"
     },
     {
       "name": "Bebida Hidratante Sabor Manzana Suerox 630 Ml",
-      "price": "194.95",
+      "price": "155.96$194.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2218036-1.jpg",
       "brand": "SUEROX"
     },
     {
       "name": "Bebida Hidratante Sabor Kiwi Fresa Suerox 630 Ml",
-      "price": "194.95",
+      "price": "155.96$194.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2218035-1.jpg",
       "brand": "SUEROX"
     },
     {
       "name": "Bebida Hidratante Sabor Mora Azul Hierbabuena Suerox 630 Ml",
-      "price": "194.95",
+      "price": "155.96$194.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2218034-1.jpg",
       "brand": "SUEROX"
     },
@@ -13819,6 +13819,12 @@
       "brand": "SAN PELLEGRINO"
     },
     {
+      "name": "Agua Tónica Zero Schweppes 1 Lt",
+      "price": "219.95",
+      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2138531-1.jpg",
+      "brand": "Schweppes"
+    },
+    {
       "name": "Agua Tónica Canada Dry 500 Ml",
       "price": "34.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2131596-1.jpg",
@@ -13847,18 +13853,12 @@
       "price": "559.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2203817-1.jpg",
       "brand": "FEVER TREE"
-    },
-    {
-      "name": "Agua Tónica Polar Lata 8 Onz",
-      "price": "54.95",
-      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2202835-1.jpg",
-      "brand": "POLAR"
     }
   ],
   "/bebidas/sodas-y-mezclas-para-cocteles/mezclas-para-cocteles": [
     {
       "name": "Mezclas Para Cocteles Sabor Piña Colada Master Of Mixes 1 Lt",
-      "price": "303.96$379.95",
+      "price": "379.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2085752-1.jpg",
       "brand": "Master of Mixes"
     },
@@ -13870,43 +13870,43 @@
     },
     {
       "name": "Sirop De Granadina Bartender 70Cl",
-      "price": "203.96$254.95",
+      "price": "254.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2176713-1.jpg",
       "brand": "BARTENDER"
     },
     {
       "name": "Mango Margarita Daiquiri Master Of Mixes 1 Lt",
-      "price": "303.96$379.95",
+      "price": "379.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2144083-1.jpg",
       "brand": "Master of Mixes"
     },
     {
       "name": "Coctel Cosmopolitan Master Of Mixes 1 Lt",
-      "price": "303.96$379.95",
+      "price": "379.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2085751-1.jpg",
       "brand": "Master of Mixes"
     },
     {
       "name": "Coctel Sweet And Sour Master Of Mixes 1Lt",
-      "price": "303.96$379.95",
+      "price": "379.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2080862-1.jpg",
       "brand": "Master of Mixes"
     },
     {
       "name": "Coctel Strawberry Daiquiri Margarita Master Of Mixes 1 Lt",
-      "price": "303.96$379.95",
+      "price": "379.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2080861-1.jpg",
       "brand": "Master of Mixes"
     },
     {
       "name": "Mezclas Para Margaritas Master Of Mixes 1 Lt",
-      "price": "303.96$379.95",
+      "price": "379.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2080860-1.jpg",
       "brand": "Master of Mixes"
     },
     {
       "name": "Mezcla Para Bloody Mary Master Of Mixes 1 Lt",
-      "price": "303.96$379.95",
+      "price": "379.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2080859-1.jpg",
       "brand": "Master of Mixes"
     },
@@ -14872,19 +14872,19 @@
   "/cervezas-vinos-y-licores/destilados/ron": [
     {
       "name": "Ron Exquisito 21 Años Cubaney 70 Cl",
-      "price": "2,719.96$3,399.95",
+      "price": "3,399.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2134312-1__1707579935.jpg",
       "brand": "CUBANEY"
     },
     {
       "name": "Ron Imperial Mizunara Cask Barcelo 70 Cl",
-      "price": "1,879.96$2,349.95",
+      "price": "2,349.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2223626-1__1703691324.jpg",
       "brand": "BARCELO"
     },
     {
       "name": "Ron Barceló Imperial Selección Especial 70 Cl",
-      "price": "1,003.96$1,254.95",
+      "price": "1,154.95$1,254.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2205076-1__1701295522.png",
       "brand": "BARCELO"
     },
@@ -14926,13 +14926,13 @@
     },
     {
       "name": "Ron Imperial Maple Cask Barceló 70 Cl",
-      "price": "1,347.96$1,684.95",
+      "price": "1,684.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221177-1__1693420522.jpg",
       "brand": "BARCELO"
     },
     {
       "name": "Ron Ultra Premium Legado Caballo Mayor 75 Cl",
-      "price": "2,535.96$3,169.95",
+      "price": "3,169.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2216675-1__1691769922.jpg",
       "brand": "LEGADO CABALLO MAYOR"
     },
@@ -15094,13 +15094,13 @@
   "/cervezas-vinos-y-licores/destilados/tequila": [
     {
       "name": "Tequila Blanco Casa Dragones 375 Ml",
-      "price": "4,699.95",
+      "price": "3,759.96$4,699.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219323-1__1705008326.jpg",
       "brand": "CASA DRAGONES MGC"
     },
     {
       "name": "Tequila Reposado Casa Dragones 375 Ml",
-      "price": "8,449.95",
+      "price": "6,759.96$8,449.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219322-1__1705008325.jpg",
       "brand": "CASA DRAGONES MGC"
     },
@@ -15118,19 +15118,19 @@
     },
     {
       "name": "Tequila Reposado Clase Azul 75 Cl",
-      "price": "15,999.95",
+      "price": "12,799.96$15,999.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2222802-1__1702584923.jpg",
       "brand": "CINTA AZUL"
     },
     {
       "name": "Tequila Reposado Diamante Maestro Dobel 75 Cl",
-      "price": "3,724.95",
+      "price": "2,979.96$3,724.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2224263-1__1702071927.jpg",
       "brand": "MAESTRO DOBEL"
     },
     {
       "name": "Tequila Reposado Casa Maetri 75 Cl",
-      "price": "6,099.95",
+      "price": "4,879.96$6,099.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2222804-1__1701466538.jpg",
       "brand": "Casa Maestri"
     },
@@ -15148,19 +15148,19 @@
     },
     {
       "name": "Tequila Reposado Casa Amigos 75 Cl",
-      "price": "5,052.95",
+      "price": "3,979.96$5,052.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2222043-1__1701178538.jpg",
       "brand": "CASA AMIGOS"
     },
     {
       "name": "Tequila Blanco Casa Amigos 75 Cl",
-      "price": "4,394.95",
+      "price": "3,459.96$4,394.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2222042-1__1701178537.jpg",
       "brand": "CASA AMIGOS"
     },
     {
       "name": "Tequila Blanco Teremana 75 Cl",
-      "price": "3,399.95",
+      "price": "2,719.96$3,399.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2222781-1__1694470521.jpg",
       "brand": "Teremana"
     }
@@ -15242,7 +15242,7 @@
   "/cervezas-vinos-y-licores/destilados/aguardientes-amargos-y-grappa": [
     {
       "name": "Amargo Chuncho 75 Ml",
-      "price": "319.96$399.95",
+      "price": "399.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2220701-1__1698178977.jpg",
       "brand": "CHUNCHO"
     },
@@ -15402,7 +15402,7 @@
     },
     {
       "name": "Crema de Tequila Sabor Fresa Rose Tequila 70 Cl",
-      "price": "1,899.95",
+      "price": "1,519.96$1,899.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2050486-1__1692396321.jpg",
       "brand": "ROSE TEQUILA STRW"
     },
@@ -15606,19 +15606,19 @@
     },
     {
       "name": "Coctel Mojito Master Of Mixes 1 Lt",
-      "price": "303.96$379.95",
+      "price": "379.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2093938-1.jpg",
       "brand": "Master of Mixes"
     },
     {
       "name": "Mezcla Para Cocteles Sour Apple Martini Master Of Mixes 1 Lt",
-      "price": "303.96$379.95",
+      "price": "379.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2093937-1.jpg",
       "brand": "Master of Mixes"
     },
     {
       "name": "Bitter Angostura 4 Onz",
-      "price": "447.96$559.95",
+      "price": "559.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2002149-1.jpg",
       "brand": "ANGOSTURA"
     }
@@ -15781,12 +15781,6 @@
       "brand": "ROMEO Y JULIETA VINT"
     },
     {
-      "name": "Cigarros Artesanales Cetros Aurora 20 Und/Paq",
-      "price": "198.71$264.95",
-      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2011368-1.jpg",
-      "brand": "AURORA"
-    },
-    {
       "name": "Cigarro Petite Vainilla Leon Jimenes 10 Und/Paq",
       "price": "499.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2004235-1.jpg",
@@ -15832,13 +15826,13 @@
     },
     {
       "name": "Lavaplatos Higiene Total Aroma Limón La Salud 1000 Ml",
-      "price": "149.95$179.95",
+      "price": "179.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2215872-1.jpg",
       "brand": "LA SALUD"
     },
     {
       "name": "Lavaplatos Líquido Fórmula Original La Salud 1 Lt",
-      "price": "149.95$179.95",
+      "price": "179.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2215871-1.jpg",
       "brand": "LA SALUD"
     },
@@ -17106,7 +17100,7 @@
   "/limpieza-y-desechables/cuidado-de-la-ropa/jabones-de-lavanderia": [
     {
       "name": "Jabón De Cuaba en Barra Lider 5 Und/Paq",
-      "price": "84.95$94.95",
+      "price": "94.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2221205-1__1695068120.jpg",
       "brand": "LIDER"
     },
@@ -17154,7 +17148,7 @@
     },
     {
       "name": "Jabón De Cuaba Líquido Lider 2.5 Gl",
-      "price": "407.96$479.95",
+      "price": "479.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2162486-1.jpg",
       "brand": "LIDER"
     },
@@ -17476,7 +17470,7 @@
     },
     {
       "name": "Papel Toalla Blanco Grande Simply Done",
-      "price": "109.95",
+      "price": "99.95$109.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2197743-1.jpg",
       "brand": "SIMPLY DONE"
     },
@@ -17680,7 +17674,7 @@
     },
     {
       "name": "Papel De Aluminio Simply Done 25 Pies",
-      "price": "129.95",
+      "price": "109.95$129.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2170267-1.jpg",
       "brand": "SIMPLY DONE"
     },
@@ -17839,12 +17833,6 @@
       "brand": "SIMPLY DONE"
     },
     {
-      "name": "Fundas De Almacenamiento Para Freezer Medianas Diamond 20 Und/Paq",
-      "price": "248.95",
-      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2146668-1.jpg",
-      "brand": "DIAMOND"
-    },
-    {
       "name": "Funda Para Almacenar Sandwich Ziploc 40 Und/Paq",
       "price": "404.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2021759-1.jpg",
@@ -17879,6 +17867,12 @@
       "price": "59.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2196295-1.jpg",
       "brand": "THAT'S SMART"
+    },
+    {
+      "name": "Fundas Para Picaderas Simply Done 100 Und/Paq",
+      "price": "239.95",
+      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2195432-1.jpg",
+      "brand": "SIMPLY DONE"
     }
   ],
   "/limpieza-y-desechables/desechables-de-organizacion/platos-vasos-cubiertos-y-accesorios": [
@@ -18055,9 +18049,9 @@
       "brand": "COLGATE"
     },
     {
-      "name": "Pasta Dental Colgate Total Carbón Activado 75 ML 3 Und/Paq",
+      "name": "Pasta Dental Colgate Total Clean Mint 100 ML",
       "price": "204.95$248.95",
-      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2018924-1__1704898523.jpg",
+      "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/0/2018924-1__1708353921.jpg",
       "brand": "COLGATE"
     },
     {
@@ -18067,7 +18061,7 @@
       "brand": "CREST"
     },
     {
-      "name": "Pasta Dental Total Clean Mint Colgate 50 Ml",
+      "name": "Pasta Dental Total Clean Mint Colgate 63 Ml",
       "price": "174.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2216559-1__1702138551.jpg",
       "brand": "COLGATE"
@@ -18414,19 +18408,19 @@
     },
     {
       "name": "Shampoo Para Niños Manzanilla Becense 300 Ml",
-      "price": "139.95",
+      "price": "114.95$139.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219603-1.jpg",
       "brand": "BECENSE"
     },
     {
       "name": "Shampoo Para Niños Lavanda Becense 300 Ml",
-      "price": "139.95",
+      "price": "114.95$139.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219602-1.jpg",
       "brand": "BECENSE"
     },
     {
       "name": "Shampoo Para Niños Aloe Vera Becense 300 Ml",
-      "price": "139.95",
+      "price": "114.95$139.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219601-1.jpg",
       "brand": "BECENSE"
     }
@@ -18434,13 +18428,13 @@
   "/salud-y-belleza/cuidado-capilar/acondicionador": [
     {
       "name": "Acondicionador Para Niños Lavanda Becense 300 Ml",
-      "price": "139.95",
+      "price": "114.95$139.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219605-1.JPG",
       "brand": "BECENSE"
     },
     {
       "name": "Acondicionador Reparación Completa Becense 300 Ml",
-      "price": "110.45$129.95",
+      "price": "129.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219581-1.jpg",
       "brand": "BECENSE"
     },
@@ -18464,19 +18458,19 @@
     },
     {
       "name": "Acondicionador Mantequilla de Karité Liso Irresistible Becense 300 Ml",
-      "price": "110.45$129.95",
+      "price": "129.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219569-1.jpg",
       "brand": "BECENSE"
     },
     {
       "name": "Acondicionador Para Niños Aloe Vera Becense 300 Ml",
-      "price": "139.95",
+      "price": "114.95$139.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219604-1.jpg",
       "brand": "BECENSE"
     },
     {
       "name": "Acondicionador Aceite de Argán Hidratación y Movimiento Becense 300 Ml",
-      "price": "110.45$129.95",
+      "price": "129.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219568-1.jpg",
       "brand": "BECENSE"
     },
@@ -18488,13 +18482,13 @@
     },
     {
       "name": "Acondicionador Para Niños Manzanilla Becense 300 Ml",
-      "price": "139.95",
+      "price": "114.95$139.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219606-1.jpg",
       "brand": "BECENSE"
     },
     {
       "name": "Acondicionador Aceite de Coco Milagroso Becense 300 Ml",
-      "price": "110.45$129.95",
+      "price": "129.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219567-1.jpg",
       "brand": "BECENSE"
     },
@@ -18538,31 +18532,31 @@
     },
     {
       "name": "Mascarilla Reparación Completa Becense 900 Gr",
-      "price": "152.95$179.95",
+      "price": "179.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219586-1.jpg",
       "brand": "BECENSE"
     },
     {
       "name": "Mascarilla Rizos Poderosos Becense 900 Gr",
-      "price": "152.95$179.95",
+      "price": "179.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219585-1.jpg",
       "brand": "BECENSE"
     },
     {
       "name": "Mascarilla Liso Irresistible Becense 900 Gr",
-      "price": "152.95$179.95",
+      "price": "179.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219584-1.jpg",
       "brand": "BECENSE"
     },
     {
       "name": "Mascarilla Hidratación y Movimiento Becense 900 Gr",
-      "price": "152.95$179.95",
+      "price": "179.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219583-1.jpg",
       "brand": "BECENSE"
     },
     {
       "name": "Mascarilla Coco Milagroso Becense 900 Gr",
-      "price": "152.95$179.95",
+      "price": "179.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219582-1.jpg",
       "brand": "BECENSE"
     },
@@ -18642,7 +18636,7 @@
     },
     {
       "name": "Gel Para Cabello Niños Brillo Humedo Becense 220 Gr",
-      "price": "109.95",
+      "price": "94.95$109.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2219611-1.jpg",
       "brand": "BECENSE"
     },
@@ -21135,7 +21129,7 @@
     },
     {
       "name": "Pañales Etapa 7 Pampers Swaddlers 44 Und/Paq",
-      "price": "2,274.95$2,674.95",
+      "price": "2,194.95$2,674.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2199599-1.jpg",
       "brand": "PAMPERS"
     },
@@ -21191,7 +21185,7 @@
     },
     {
       "name": "Gel De Baño Hidratante Dove Baby 13 Onz",
-      "price": "419.95",
+      "price": "314.95$419.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/1/2198675-1.jpg",
       "brand": "DOVE"
     },
@@ -21209,7 +21203,7 @@
     },
     {
       "name": "Gel De Baño Calmante Para La Noche Dove Baby 13 Onz",
-      "price": "419.95",
+      "price": "314.95$419.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2202028-1.jpg",
       "brand": "DOVE"
     },
@@ -21233,7 +21227,7 @@
     },
     {
       "name": "Locion Calmante Para La Noche Dove Baby 13 Onz",
-      "price": "409.95",
+      "price": "304.95$409.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2202027-1.jpg",
       "brand": "DOVE"
     },
@@ -21867,7 +21861,7 @@
     },
     {
       "name": "Alimento Para Gatos de Pavo en Salsa Gravy Fancy Feast 85 Gr",
-      "price": "94.95",
+      "price": "98.95",
       "image": "https://supermercadosnacional.com/media/catalog/product/cache/afcac67a0d77755283578b677f040f2b/2/2/2220361-1.jpg",
       "brand": "FANCY FEAST"
     },

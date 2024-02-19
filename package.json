@@ -4,7 +4,7 @@
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.4.4",
     "npm": "^10.4.0",
-    "puppeteer": "^22.0.0"
+    "puppeteer": "^22.1.0"
   },
   "type": "module",
   "name": "e-commerce-scraper",

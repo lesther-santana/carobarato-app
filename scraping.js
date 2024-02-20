@@ -1,23 +1,14 @@
 import * as cheerio from 'cheerio'
 import axios from 'axios';
+import dotenv from "dotenv";
 
-export async function buildCatalog(rootURL) {
-    let catalog = {}
-    const html = (await axios.get(rootURL)).data
-    const $  = cheerio.load(html)
-    const endpoints = getEndpoints($)
-    const productPromises = endpoints.map(url => parseEndpoint(url))
-    const products = await Promise.all(productPromises)
-    endpoints.forEach((url, i) => {
-        catalog[url] = products[i]
-    })
-    return catalog
-}
+dotenv.config();
 
 function getEndpoints($) {
     const links = []
     const $ahrefs = $("li.level2 a")
-    $ahrefs.each(function() {
+
+    $ahrefs.each(function () {
         const href = $(this).attr('href')
         links.push(href)
     })
@@ -37,16 +28,29 @@ async function parseEndpoint(endpoint) {
             const totalItemsText = $(".toolbar-number").text()
             totalItems = totalItemsText ? parseInt(totalItemsText) : 0
             const $items = $("ol.products").children()
-            $items.each(function() {
-                const name = $(this).find(".product.name").text().trim()
-                const price = $(this).find("span.price").text().trim()
-                products.push({name, price})
-            })
-            if ( $items.length === 0 || products.length === totalItems) {
+
+            if ($items.length === 0 || products.length === totalItems) {
                 break
             }
+
+            $items.each(function () {
+                const image = $(this).find(".product-image-container .product-image-photo")[0].attribs.src;
+                const brand = $(this).find(".product-brand").text().trim();
+                const name = $(this).find(".product.name").text().trim();
+                const price = $(this).find("span.price").text().trim().slice(1);
+
+                products.push({ name, price, image, brand });
+
+            })
+
             // Update url params
-            p++ 
+            p++
+
+            // Loops only once for Development purposes. Disable if needed
+            if (process.env.ENV !== 'prod') {
+                break
+            }
+
         } catch (error) {
             console.error("Cannot get data from", url.toString(), error);
             break
@@ -56,11 +60,12 @@ async function parseEndpoint(endpoint) {
     return products
 }
 
-export async function safeRequest(url, retries = 3, delay = 1000) {
+
+export async function safeRequest({ url, retries = 3, delay = 1000, headers = {} }) {
     let lastError;
-    for (let i = 0;  i < retries; i++) {
+    for (let i = 0; i < retries; i++) {
         try {
-            return await axios.get(url);
+            return await axios.get(url, { headers });
         } catch (error) {
             lastError = error
             if (error.code === 'ECONNRESET') {
@@ -70,4 +75,17 @@ export async function safeRequest(url, retries = 3, delay = 1000) {
         }
     }
     throw lastError
+}
+
+export async function buildCatalog(rootURL) {
+    let catalog = {}
+    const html = (await axios.get(rootURL)).data
+    const $ = cheerio.load(html)
+    const endpoints = getEndpoints($)
+    const productPromises = endpoints.map(url => parseEndpoint(url))
+    const products = await Promise.all(productPromises)
+    endpoints.forEach((url, i) => {
+        catalog[url.split('.com')[1]] = products[i]
+    })
+    return catalog
 }

@@ -6,6 +6,10 @@ dotenv.config();
 
 const projectRoot = process.cwd();
 
+export const SUPERMARKETS = {
+    SIRENA: 'https://sirena.do/',
+    JUMBO: `https://jumbo.com.do/`
+}
 
 export const writeFile = (supermarket = 'Nacional', report) => {
 
@@ -23,3 +27,5 @@ export const writeFile = (supermarket = 'Nacional', report) => {
     })
 
 }
+
+

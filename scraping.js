@@ -60,11 +60,12 @@ async function parseEndpoint(endpoint) {
     return products
 }
 
-export async function safeRequest(url, retries = 3, delay = 1000) {
+
+export async function safeRequest({ url, retries = 3, delay = 1000, headers = {} }) {
     let lastError;
     for (let i = 0; i < retries; i++) {
         try {
-            return await axios.get(url);
+            return await axios.get(url, { headers });
         } catch (error) {
             lastError = error
             if (error.code === 'ECONNRESET') {

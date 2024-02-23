@@ -3,6 +3,21 @@ import { writeFile } from '../utils/index.js';
 
 const SIRENA = 'https://sirena.do/';
 
+const IGNORE_FETCH = [
+    'Recreación',
+    'Organización y Decoración',
+    'Mesa y cocina',
+    'Lavado y Secado ',
+    'Ferretería y Jardinería ',
+    'Electrodomésticos Pequeños ',
+    'Electrodomésticos de Cocina',
+    'Audio, Televisión y Tecnología',
+    'Aires Acondicionados y Abanicos',
+    'Hogar y Electrodomésticos',
+    'Plaguicidas ',
+    'Mascotas',
+];
+
 const fetchWithPuppeteer = async () => {
 
     try {
@@ -13,6 +28,11 @@ const fetchWithPuppeteer = async () => {
 
         const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
+        await page.setViewport({
+            width: 1600,
+            height: 900
+        });
+
         await page.goto(SIRENA, { waitUntil: 'domcontentloaded' });
 
         console.log('> 1. Began fetching data from La Sirena');
@@ -37,21 +57,19 @@ const fetchWithPuppeteer = async () => {
             const products_arr = await page.evaluate(($category_data) => {
 
                 const elements = Array.from([...document.body.querySelectorAll('.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product')], el => {
-
+                    const price_el = el.querySelector('.item-product-price');
                     const link = el.children[1].href;
                     const image = el.children[1].outerHTML.split('&quot;')[1];
                     const title = el.children[2].children[0].innerText;
-                    const price = el.children[2].children[1].innerText.substring(1);
-
-                    return { link, image, title, price, ...$category_data }
+                    const discount = price_el.children.length > 1 ? price_el.children[1].innerText.substring(1) : null;
+                    const price = price_el.children.length > 1 ? price_el.children[0].innerText.substring(1) : price_el.innerText.substring(1);
+                    return { link, image, title, price, discount, ...$category_data, brand: null }
                 });
 
                 return elements
 
             }, category_data)
 
-
-            console.log(products_arr)
             product_data = [...product_data, ...products_arr]
 
             const nextPageButton = await page.$(`a[aria-label="Next page"]`);
@@ -63,46 +81,47 @@ const fetchWithPuppeteer = async () => {
 
         }
 
-        await page.waitForSelector(`.uk-section h2`);
+        await page.waitForSelector(`.uk-section h2`, { timeout: 5000 });
 
-        const links = await getLinks(`#uk-slider-1 > li:not(:nth-child(4), :nth-child(5), :nth-child(6), :nth-child(7)) ul li:not(.uk-nav-header) a`);
+        const links = await getLinks(`#sub-categorybar .uk-slider ul.uk-nav li a`);
 
         for (const [index, item] of links.entries()) {
             console.log(`> 2.${index + 1} Fetching for Category ${item.label}`);
 
-            await page.goto(`${item.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
+            if (!IGNORE_FETCH.includes(item.label)) {
 
-            try {
-                // Wait for the selector with a specific timeout (e.g., 3 seconds).
-                await page.waitForSelector('.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items', { timeout: 3000 });
+                await page.goto(`${item.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
 
-                const subcategories = await getLinks(`.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items li a`)
+                try {
+                    await page.waitForSelector('.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items', { timeout: 3000 });
 
-                if (subcategories.length > 0) {
+                    const subcategories = await getLinks(`.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items li a`)
 
-                    for (const category of subcategories) {
+                    if (subcategories.length > 0) {
 
-                        console.log(`>> Fetching for Category ${category.label}`);
+                        for (const category of subcategories) {
 
-                        const category_data = { category: item.label, subcategory: category.label };
+                            console.log(`>> Fetching for Category ${category.label}`);
 
+                            const category_data = { category: item.label, subcategory: category.label, slug: category.link.split('category')[1] };
 
-                        await page.goto(`${category.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
+                            await page.goto(`${category.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
 
-                        await collectProductsInformation(category_data);
+                            await collectProductsInformation(category_data);
 
-                        const slug = category.link.substring(35);
+                            const slug = category.link.substring(35);
 
-                        sirenaDictionary[slug] = product_data;
+                            sirenaDictionary[slug] = product_data;
 
+                        }
                     }
+
+                } catch (error) {
+                    console.log('>>>> Selector not found, continuing with other tasks: ', item.label);
                 }
 
-            } catch (error) {
-                console.log('>>>> Selector not found, continuing with other tasks: ', item.label);
+                await new Promise(resolve => setTimeout(resolve, 2000))
             }
-
-            await new Promise(resolve => setTimeout(resolve, 2000))
 
         }
 

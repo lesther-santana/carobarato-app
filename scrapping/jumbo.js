@@ -19,16 +19,13 @@ const headers = {
     'Cache-Control': 'no-cache'
 };
 
-
 const fetchProductsCategories = async () => {
     try {
         // Fetch the HTML content of the webpage
         const response = await safeRequest({ url: SUPERMARKETS.JUMBO, headers });
         const html = response.data;
-        // Load the HTML into Cheerio
         const $ = load(html);
         const routes_array = []
-        // Query the DOM using Cheerio (similar to jQuery)
 
         console.log('> 1. Began fetching data from Jumbo');
 
@@ -46,10 +43,9 @@ const fetchProductsCategories = async () => {
                             label: $(tag).text(),
                             link: tag.attribs.href
                         })
-                        // console.log(tag)
+
                     }
                 })
-
 
             }
 
@@ -57,16 +53,13 @@ const fetchProductsCategories = async () => {
 
         console.log('> 2. Prepared Product Category Routes');
 
-        // Output the extracted information
-        // console.log('First Product Info:', productInfo[0].children[1]);
-
         return routes_array;
     } catch (error) {
         console.error('Error fetching the webpage:', error);
     }
 };
 
-const produceProductsCatalogue = (html) => {
+const produceProductsCatalogue = (html, link, label) => {
 
     const $ = load(html)
     const $items = $(".subcategory-tiles-list").children()
@@ -74,10 +67,15 @@ const produceProductsCatalogue = (html) => {
 
     $items.each(function () {
         const image = $(this).find(".product-item-tile__img")[0].attribs.src;
-        const url = $(this).find(".product-item-tile__name .product-item-tile__link")[0].attribs.href
+        const link = $(this).find(".product-item-tile__name .product-item-tile__link")[0].attribs.href
         const name = $(this).find(".product-item-tile__name .product-item-tile__link").text();
-        const price = $(this).find(`[data-price-type="finalPrice"]`).text().split('$')[1];
-        products.push({ name, price, image, url });
+        const oldPrice = $(this).find(`[data-price-type="oldPrice"]`);
+        const price = oldPrice.length > 0 ? $(oldPrice).text().split('$')[1] : $(this).find(`[data-price-type="finalPrice"]`).text().split('$')[1];
+        const discount = oldPrice.length > 0 ? $(this).find(`[data-price-type="finalPrice"]`).text().split('$')[1] : null
+
+        let sm_link = link.split('/');
+
+        products.push({ name, price, image, link, discount, brand: null, slug: sm_link[sm_link.length - 1].split('.')[0], category: label, subcategory: null });
 
     })
 
@@ -85,24 +83,21 @@ const produceProductsCatalogue = (html) => {
 
 };
 
+
 (async () => {
 
     const jumboRoutes = await fetchProductsCategories();
-
     let catalogue = {};
 
     console.log('> 3. Started data fetch');
-
     console.time('>> Time Elapsed Fetching');
 
     for (const [index, parent] of jumboRoutes.entries()) {
 
         let category = parent.routes[0].link.split('/');
-
-        console.log(`> 3.${index + 1} Started fetch for parent category ${parent.label}`);
-
         category = category[category.length - 1].split('.')[0];
 
+        console.log(`> 3.${index + 1} Started fetch for parent category ${parent.label}`);
 
         for (const route of parent.routes) {
 
@@ -112,35 +107,30 @@ const produceProductsCatalogue = (html) => {
             console.log(`>> Fetched for ${route.label} | Page 1`);
 
             const html = response.data;
-
-            const products = produceProductsCatalogue(html);
-
+            const products = produceProductsCatalogue(html, route.link, route.label);
             const $ = load(html);
 
             const article_count = $('.total_items').text().split(' ')[0];
-
             let page_count = article_count / 15;
             page_count = page_count > parseInt(page_count) ? parseInt(page_count) + 1 : parseInt(page_count);
 
             catalogue[category] = [];
             catalogue[category].push(...products);
 
-
             if (page_count > 1) {
                 let page = 2;
 
                 while (true) {
-                    // console.log('CURRENT PAGE: ', page);
 
                     try {
 
                         console.time(`>> Fetched for ${route.label} | Page ${page}`);
 
                         const html = (await safeRequest({ url: url + `?product_list_limit=50&p=${page}`, headers })).data;
-
-                        const products = produceProductsCatalogue(html);
+                        const products = produceProductsCatalogue(html, route.link, route.label);
 
                         console.timeEnd(`>> Fetched for ${route.label} | Page ${page}`);
+
                         catalogue[category].push(...products);
 
                         if (page === page_count) break;

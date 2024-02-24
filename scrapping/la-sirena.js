@@ -66,8 +66,6 @@ const fetchWithPuppeteer = async () => {
                     const title = el.children[2].children[0].innerText;
                     const discount = price_el.children.length > 1 ? price_el.children[1].innerText.substring(1) : null;
                     const price = price_el.children.length > 1 ? price_el.children[0].innerText.substring(1) : price_el.innerText.substring(1);
-
-                    console.log(title, price)
                     return { link, image, title, price, discount, ...$category_data, brand: null }
                 });
 
@@ -90,10 +88,6 @@ const fetchWithPuppeteer = async () => {
 
         const links = (await getLinks(`#sub-categorybar .uk-slider ul.uk-nav li a`)).filter(item => !IGNORE_FETCH.includes(item.label));
 
-        console.log(links)
-
-
-
         for (const [index, item] of links.entries()) {
             console.log(`> 2.${index + 1} Fetching for Category ${item.label}`);
 
@@ -105,9 +99,7 @@ const fetchWithPuppeteer = async () => {
                 const subcategories = await getLinks(`.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items li a`)
 
                 if (subcategories.length > 0) {
-
-                    for (const category of subcategories) {
-
+                    const fetchTasks = subcategories.map(async category => {
 
                         console.log(`>> Fetching for Category ${category.label}`);
 
@@ -121,16 +113,16 @@ const fetchWithPuppeteer = async () => {
 
                         sirenaDictionary[slug] = product_data;
 
-                    }
+                        return product_data
 
+                    });
+                    await Promise.all(fetchTasks);
                 }
-
 
             } catch (error) {
                 console.log('>>>> Selector not found, continuing with other tasks: ', item.label);
             }
 
-            // await new Promise(resolve => setTimeout(resolve, 2000))
 
 
         }
@@ -151,69 +143,3 @@ const fetchWithPuppeteer = async () => {
 
 
 fetchWithPuppeteer()
-
-
-
-//     await browser.close();
-// })();
-// (async () => {
-//     const browser = await puppeteer.launch({ headless: true });
-//     const page = await browser.newPage();
-//     await page.goto('https://jumbo.com.do/supermercado/lacteos-y-huevos/lacteos.html', { waitUntil: 'domcontentloaded' });
-//     // Perform scraping actions here
-
-//     await page.waitForSelector('.tiles-list');
-
-//     const firstItemData = await page.evaluate(() => {
-//         const query = document.querySelectorAll('.tiles-list .product-item-info');
-//         if (query.length > 0) {
-//             // Extract and return the data you need from the element
-//             return query[0].textContent; // Example: return the text content
-//         }
-//         return null;
-//     });
-
-//     console.log('First item data:', firstItemData);
-
-//     await browser.close();
-// })();
-
-
-// (async () => {
-//     try {
-
-//         const headers = {
-//             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:121.0) Gecko/20100101 Firefox/121.0',
-//             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-//             'Accept-Language': 'en-US,en;q=0.5',
-//             'Accept-Encoding': 'gzip, deflate, br',
-//             'Referer': 'https://jumbo.com.do/',
-//             'Connection': 'keep-alive',
-//             'Upgrade-Insecure-Requests': '1',
-//             'Sec-Fetch-Dest': 'document',
-//             'Sec-Fetch-Mode': 'navigate',
-//             'Sec-Fetch-Site': 'same-origin',
-//             'Sec-Fetch-User': '?1',
-//             'Pragma': 'no-cache',
-//             'Cache-Control': 'no-cache'
-//         };
-
-
-//         // Fetch the HTML content of the webpage
-//         const response = await axios.get('https://jumbo.com.do/supermercado/lacteos-y-huevos/lacteos.html', {
-//             headers
-//         });
-//         const html = response.data;
-
-//         // Load the HTML into Cheerio
-//         const $ = cheerio.load(html);
-
-//         // Query the DOM using Cheerio (similar to jQuery)
-//         const productInfo = $('.tiles-list .product-item-info').first().text();
-
-//         // Output the extracted information
-//         console.log('First Product Info:', productInfo.trim());
-//     } catch (error) {
-//         console.error('Error fetching the webpage:', error);
-//     }
-// })();

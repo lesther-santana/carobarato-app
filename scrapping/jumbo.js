@@ -18,7 +18,6 @@ const headers = {
     'Pragma': 'no-cache',
     'Cache-Control': 'no-cache'
 };
-
 const fetchProductsCategories = async () => {
     try {
         // Fetch the HTML content of the webpage
@@ -85,22 +84,19 @@ const produceProductsCatalogue = (html, link, label) => {
 
 
 (async () => {
-
     const jumboRoutes = await fetchProductsCategories();
     let catalogue = {};
 
     console.log('> 3. Started data fetch');
     console.time('>> Time Elapsed Fetching');
 
-    for (const [index, parent] of jumboRoutes.entries()) {
-
+    await Promise.all(jumboRoutes.map(async (parent, index) => {
         let category = parent.routes[0].link.split('/');
         category = category[category.length - 1].split('.')[0];
 
         console.log(`> 3.${index + 1} Started fetch for parent category ${parent.label}`);
 
-        for (const route of parent.routes) {
-
+        await Promise.all(parent.routes.map(async (route) => {
             const url = route.link + '?product_list_limit=50';
             const response = await safeRequest({ url, headers });
 
@@ -121,9 +117,7 @@ const produceProductsCatalogue = (html, link, label) => {
                 let page = 2;
 
                 while (true) {
-
                     try {
-
                         console.time(`>> Fetched for ${route.label} | Page ${page}`);
 
                         const html = (await safeRequest({ url: url + `?product_list_limit=50&p=${page}`, headers })).data;
@@ -137,30 +131,18 @@ const produceProductsCatalogue = (html, link, label) => {
 
                         page++;
 
-                        await new Promise(resolve => setTimeout(resolve, 1000))
-
+                        // await new Promise(resolve => setTimeout(resolve, 1000));
 
                     } catch (error) {
                         console.error("Cannot get data from", url.toString(), error);
-                        break
+                        break;
                     }
-
                 }
             }
+        }));
+    }));
 
-
-            // if( article_count /)
-            // console.log({ page_count })
-
-        }
-    }
-
-
-    console.log(`> 4. Data fetching ended succesfully`);
-
-    console.timeEnd('>> Time Elapsed Fetching')
-
-    writeFile('jumbo', catalogue)
-
-
-})()
+    console.log(`> 4. Data fetching ended successfully`);
+    console.timeEnd('>> Time Elapsed Fetching');
+    writeFile('jumbo', catalogue);
+})();

@@ -16,6 +16,9 @@ const IGNORE_FETCH = [
     'Hogar y Electrodomésticos',
     'Plaguicidas ',
     'Mascotas',
+    'Wala',
+    'Zerca',
+    'Nuestras Marcas'
 ];
 
 const fetchWithPuppeteer = async () => {
@@ -63,6 +66,8 @@ const fetchWithPuppeteer = async () => {
                     const title = el.children[2].children[0].innerText;
                     const discount = price_el.children.length > 1 ? price_el.children[1].innerText.substring(1) : null;
                     const price = price_el.children.length > 1 ? price_el.children[0].innerText.substring(1) : price_el.innerText.substring(1);
+
+                    console.log(title, price)
                     return { link, image, title, price, discount, ...$category_data, brand: null }
                 });
 
@@ -83,47 +88,53 @@ const fetchWithPuppeteer = async () => {
 
         await page.waitForSelector(`.uk-section h2`, { timeout: 5000 });
 
-        const links = await getLinks(`#sub-categorybar .uk-slider ul.uk-nav li a`);
+        const links = (await getLinks(`#sub-categorybar .uk-slider ul.uk-nav li a`)).filter(item => !IGNORE_FETCH.includes(item.label));
+
+        console.log(links)
+
+
 
         for (const [index, item] of links.entries()) {
             console.log(`> 2.${index + 1} Fetching for Category ${item.label}`);
 
-            if (!IGNORE_FETCH.includes(item.label)) {
+            await page.goto(`${item.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
 
-                await page.goto(`${item.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
+            try {
+                await page.waitForSelector('.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items', { timeout: 3000 });
 
-                try {
-                    await page.waitForSelector('.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items', { timeout: 3000 });
+                const subcategories = await getLinks(`.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items li a`)
 
-                    const subcategories = await getLinks(`.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items li a`)
+                if (subcategories.length > 0) {
 
-                    if (subcategories.length > 0) {
+                    for (const category of subcategories) {
 
-                        for (const category of subcategories) {
 
-                            console.log(`>> Fetching for Category ${category.label}`);
+                        console.log(`>> Fetching for Category ${category.label}`);
 
-                            const category_data = { category: item.label, subcategory: category.label, slug: category.link.split('category')[1] };
+                        const category_data = { category: item.label, subcategory: category.label, slug: category.link.split('category')[1] };
 
-                            await page.goto(`${category.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
+                        await page.goto(`${category.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
 
-                            await collectProductsInformation(category_data);
+                        await collectProductsInformation(category_data);
 
-                            const slug = category.link.substring(35);
+                        const slug = category.link.substring(35);
 
-                            sirenaDictionary[slug] = product_data;
+                        sirenaDictionary[slug] = product_data;
 
-                        }
                     }
 
-                } catch (error) {
-                    console.log('>>>> Selector not found, continuing with other tasks: ', item.label);
                 }
 
-                await new Promise(resolve => setTimeout(resolve, 2000))
+
+            } catch (error) {
+                console.log('>>>> Selector not found, continuing with other tasks: ', item.label);
             }
 
+            // await new Promise(resolve => setTimeout(resolve, 2000))
+
+
         }
+
 
         await browser.close();
 

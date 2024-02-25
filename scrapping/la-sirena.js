@@ -73,6 +73,7 @@ const fetchWithPuppeteer = async () => {
 
             }, category_data)
 
+
             product_data = [...product_data, ...products_arr]
 
             const nextPageButton = await page.$(`a[aria-label="Next page"]`);
@@ -99,7 +100,7 @@ const fetchWithPuppeteer = async () => {
                 const subcategories = await getLinks(`.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items li a`)
 
                 if (subcategories.length > 0) {
-                    const fetchTasks = subcategories.map(async category => {
+                    for (const category of subcategories) {
 
                         console.log(`>> Fetching for Category ${category.label}`);
 
@@ -115,15 +116,14 @@ const fetchWithPuppeteer = async () => {
 
                         return product_data
 
-                    });
-                    await Promise.all(fetchTasks);
+                    };
                 }
 
             } catch (error) {
                 console.log('>>>> Selector not found, continuing with other tasks: ', item.label);
             }
 
-
+            // await new Promise(resolve => setTimeout(resolve, 2000))
 
         }
 

@@ -73,7 +73,6 @@ const fetchWithPuppeteer = async () => {
 
             }, category_data)
 
-
             product_data = [...product_data, ...products_arr]
 
             const nextPageButton = await page.$(`a[aria-label="Next page"]`);
@@ -114,7 +113,6 @@ const fetchWithPuppeteer = async () => {
 
                         sirenaDictionary[slug] = product_data;
 
-                        return product_data
 
                     };
                 }
@@ -122,8 +120,6 @@ const fetchWithPuppeteer = async () => {
             } catch (error) {
                 console.log('>>>> Selector not found, continuing with other tasks: ', item.label);
             }
-
-            // await new Promise(resolve => setTimeout(resolve, 2000))
 
         }
 

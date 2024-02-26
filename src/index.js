@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import router from './routes/index.js';
 import cors from 'cors';
 import os from 'os';
+import sequelize from '../database/index.js';
 
 dotenv.config();
 
@@ -52,13 +53,21 @@ app.use(router);
 findAvailablePort(port)
     .then((availablePort) => {
 
-        const hostname = os.hostname();
 
-        console.log(`Available port: ${availablePort}`)
+        sequelize.authenticate()
+            .then(() => {
 
-        app.listen(availablePort, () => console.log(`App listening on http://${hostname}:${availablePort}/api`));
+                const hostname = os.hostname();
 
-        // Use the availablePort for starting the server
+                console.log(`Available port: ${availablePort}`)
+
+                app.listen(availablePort, () => console.log(`App listening on http://${hostname}:${availablePort}/api`));
+
+            })
+            .catch(err => {
+                console.error('Unable to connect to the database:', err);
+            });
+
     })
     .catch((err) => {
         console.error('Error finding available port:', err)

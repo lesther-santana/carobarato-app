@@ -4,6 +4,12 @@ import { writeFile } from '../utils/index.js';
 const SIRENA = 'https://sirena.do/';
 
 const IGNORE_FETCH = [
+    'Bebidas',
+    'Cuidado Personal y Belleza',
+    'Frutas y Vegetales',
+    'Limpieza',
+    'Alimentación',
+    'Hogar y Electrodomésticos',
     'Recreación',
     'Organización y Decoración',
     'Mesa y cocina',
@@ -18,7 +24,8 @@ const IGNORE_FETCH = [
     'Mascotas',
     'Wala',
     'Zerca',
-    'Nuestras Marcas'
+    'Nuestras Marcas',
+    'Bebés',
 ];
 
 const fetchWithPuppeteer = async () => {

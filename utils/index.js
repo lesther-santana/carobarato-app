@@ -14,19 +14,27 @@ export const SUPERMARKETS = {
 export const writeFile = (supermarket = 'Nacional', report) => {
     const filepath = path.join(projectRoot, 'files', supermarket + '.json');
 
-    // Check if the file exists
     if (fs.existsSync(filepath)) {
-        // If it exists, delete the file
-        fs.unlinkSync(filepath);
-        console.log(`Deleted old file for: ${supermarket}`);
+        fs.unlink(filepath, error => {
+            if (error) {
+                console.error(`Error deleting file for: ${supermarket}`, error);
+                return;
+            }
+            console.log('>>>> File deleted for ', supermarket);
+            writeNewFile(filepath, report, supermarket);
+        });
+    } else {
+        writeNewFile(filepath, report, supermarket);
     }
+};
 
-    // Now write the new file
-    fs.writeFile(filepath, JSON.stringify(report, null, 2), error => {
+const writeNewFile = (filepath, report, supermarket) => {
+    fs.writeFile(filepath, JSON.stringify(report), error => {
         if (error) {
-            console.error(`Error Writing file for: ${supermarket}`, error);
+            console.error(`Error writing file for: ${supermarket}`, error);
             return;
         }
         console.log('>>>> END: Wrote file for ', supermarket);
     });
 };
+

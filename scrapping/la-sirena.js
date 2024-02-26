@@ -4,6 +4,12 @@ import { writeFile } from '../utils/index.js';
 const SIRENA = 'https://sirena.do/';
 
 const IGNORE_FETCH = [
+    'Bebidas',
+    'Cuidado Personal y Belleza',
+    'Frutas y Vegetales',
+    'Limpieza',
+    'Alimentación',
+    'Hogar y Electrodomésticos',
     'Recreación',
     'Organización y Decoración',
     'Mesa y cocina',
@@ -18,7 +24,8 @@ const IGNORE_FETCH = [
     'Mascotas',
     'Wala',
     'Zerca',
-    'Nuestras Marcas'
+    'Nuestras Marcas',
+    'Bebés',
 ];
 
 const fetchWithPuppeteer = async () => {
@@ -73,7 +80,6 @@ const fetchWithPuppeteer = async () => {
 
             }, category_data)
 
-
             product_data = [...product_data, ...products_arr]
 
             const nextPageButton = await page.$(`a[aria-label="Next page"]`);
@@ -114,7 +120,6 @@ const fetchWithPuppeteer = async () => {
 
                         sirenaDictionary[slug] = product_data;
 
-                        return product_data
 
                     };
                 }
@@ -122,8 +127,6 @@ const fetchWithPuppeteer = async () => {
             } catch (error) {
                 console.log('>>>> Selector not found, continuing with other tasks: ', item.label);
             }
-
-            // await new Promise(resolve => setTimeout(resolve, 2000))
 
         }
 

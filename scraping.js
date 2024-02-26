@@ -4,6 +4,21 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.5',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Connection': 'keep-alive',
+    'Upgrade-Insecure-Requests': '1',
+    'Sec-Fetch-Dest': 'document',
+    'Sec-Fetch-Mode': 'navigate',
+    'Sec-Fetch-Site': 'same-origin',
+    'Pragma': 'no-cache',
+    'Cache-Control': 'no-cache'
+};
+
+
 function getEndpoints($) {
     const links = []
     const $ahrefs = $("li.level2 a")
@@ -23,7 +38,7 @@ async function parseEndpoint(endpoint) {
     while (true) {
         url.searchParams.set("p", p)
         try {
-            const html = (await safeRequest(url)).data
+            const html = (await safeRequest({ url: url.toString(), headers })).data
             const $ = cheerio.load(html)
             const totalItemsText = $(".toolbar-number").text()
             totalItems = totalItemsText ? parseInt(totalItemsText) : 0
@@ -37,9 +52,18 @@ async function parseEndpoint(endpoint) {
                 const image = $(this).find(".product-image-container .product-image-photo")[0].attribs.src;
                 const brand = $(this).find(".product-brand").text().trim();
                 const name = $(this).find(".product.name").text().trim();
-                const price = $(this).find("span.price").text().trim().slice(1);
-
-                products.push({ name, price, image, brand });
+                const prices = $(this).find("span.price")
+                const slug = url.pathname.toString()
+                let discount = null
+                let  price = null
+                if (prices.length > 1 ) {
+                    discount = $(this).find("span.special-price .price").text().trim().slice(1);
+                    price = $(this).find("span.old-price .price").text().trim().slice(1);
+                } else {
+                    price = $(this).find("span.price").text().trim().slice(1); 
+                }
+                const link = $(this).find(".product-item-link").attr('href');
+                products.push({ name, price, discount, image, brand, link, slug});
 
             })
 

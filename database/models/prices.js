@@ -1,7 +1,7 @@
 // Price model definition
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../index'; // Import your Sequelize instance
-
+import sequelize from '../index.js'; // Import your Sequelize instance
+import Product from './products.js';
 class Price extends Model { }
 
 Price.init(
@@ -37,8 +37,5 @@ Price.init(
         underscored: true, // Set to true if your columns are in snake_case
     }
 );
-
-// Define the foreign key constraint
-Price.belongsTo(Product, { foreignKey: 'product_id' });
 
 export default Price;

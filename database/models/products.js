@@ -1,6 +1,7 @@
 // Product model definition
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../index.js'; // Import your Sequelize instance
+import Price from './prices.js';
 
 class Product extends Model { }
 

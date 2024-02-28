@@ -10,6 +10,12 @@ const SAMPLE_IDS = {
 
 export const getProducts = async (req, res) => {
 
+
+
+    const { search, supermarket } = req.query;
+
+    console.log("Get products", { search, supermarket })
+
     const products = await Product.findAll({
         limit: 20,
         where: {

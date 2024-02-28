@@ -49,21 +49,25 @@ async function parseEndpoint(endpoint) {
             }
 
             $items.each(function () {
+                const category = $('.page-title-wrapper').find(".page-title").text().trim();
                 const image = $(this).find(".product-image-container .product-image-photo")[0].attribs.src;
                 const brand = $(this).find(".product-brand").text().trim();
                 const name = $(this).find(".product.name").text().trim();
                 const prices = $(this).find("span.price")
                 const slug = url.pathname.toString()
                 let discount = null
-                let  price = null
-                if (prices.length > 1 ) {
+                let price = null
+
+                if (prices.length > 1) {
                     discount = $(this).find("span.special-price .price").text().trim().slice(1);
                     price = $(this).find("span.old-price .price").text().trim().slice(1);
                 } else {
-                    price = $(this).find("span.price").text().trim().slice(1); 
+                    price = $(this).find("span.price").text().trim().slice(1);
                 }
+
                 const link = $(this).find(".product-item-link").attr('href');
-                products.push({ name, price, discount, image, brand, link, slug});
+
+                products.push({ name, price, discount, image, brand, link, category, slug });
 
             })
 

@@ -110,7 +110,7 @@ const fetchWithPuppeteer = async () => {
 
                         console.log(`>> Fetching for Category ${category.label}`);
 
-                        const category_data = { category: item.label, subcategory: category.label, slug: category.link.split('category')[1] };
+                        const category_data = { category: category.label, slug: category.link.split('category')[1] };
 
                         await page.goto(`${category.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
 

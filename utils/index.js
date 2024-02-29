@@ -14,6 +14,11 @@ export const SUPERMARKETS = {
 export const writeFile = (supermarket = 'Nacional', report) => {
     const filepath = path.join(projectRoot, 'files', supermarket + '.json');
 
+    // Check if the directory exists, if not create it
+    if (!fs.existsSync("files")){
+        fs.mkdirSync("files", { recursive: true });
+    }
+
     if (fs.existsSync(filepath)) {
         fs.unlink(filepath, error => {
             if (error) {

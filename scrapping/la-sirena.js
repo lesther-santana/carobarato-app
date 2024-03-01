@@ -70,10 +70,10 @@ const fetchWithPuppeteer = async () => {
                     const price_el = el.querySelector('.item-product-price');
                     const link = el.children[1].href;
                     const image = el.children[1].outerHTML.split('&quot;')[1];
-                    const title = el.children[2].children[0].innerText;
+                    const name = el.children[2].children[0].innerText;
                     const discount = price_el.children.length > 1 ? price_el.children[1].innerText.substring(1) : null;
                     const price = price_el.children.length > 1 ? price_el.children[0].innerText.substring(1) : price_el.innerText.substring(1);
-                    return { link, image, title, price, discount, ...$category_data, brand: null }
+                    return { link, image, name, price, discount, ...$category_data, brand: null }
                 });
 
                 return elements
@@ -116,7 +116,7 @@ const fetchWithPuppeteer = async () => {
 
                         await collectProductsInformation(category_data);
 
-                        const slug = category.link.substring(35);
+                        const slug = category.link.substring(36);
 
                         sirenaDictionary[slug] = product_data;
 

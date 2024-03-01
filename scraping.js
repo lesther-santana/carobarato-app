@@ -75,9 +75,9 @@ async function parseEndpoint(endpoint) {
             p++
 
             // Loops only once for Development purposes. Disable if needed
-            if (process.env.ENV !== 'prod') {
-                break
-            }
+            // if (process.env.ENV !== 'prod') {
+            //     break
+            // }
 
         } catch (error) {
             console.error("Cannot get data from", url.toString(), error);

@@ -1,105 +1,169 @@
 import * as fs from "fs"
 import pg from 'pg'
 import dotenv from "dotenv";
-
-dotenv.config();
-
-
+import format from "pg-format";
 const { Pool } = pg
-const pool = new Pool({
-    user: process.env.PGUSER,
-    password: process.env.PGPASSWORD,
-    database: process.env.PGDATABASE,
-    port: process.env.PGPORT,
-    host: process.env.PGHOST,
-})
 
-
-function getInsertProductText() {
-    const insertText = "INSERT INTO products(supermercado, product_name, product_url, img_url, slug, brand)"
-    const valuesText = "VALUES ($1, $2, $3, $4, $5, $6) RETURNING product_id;"
-    return [insertText, valuesText].join(" ")
-};
-
-
-function getInsertPriceText() {
-    const insertText = "INSERT INTO prices(product_id, list_price, discounted_price)"
-    const valuesText = "VALUES ($1, $2, $3);"
-    return [insertText, valuesText].join(" ")
-}
-
-function getProdExistQuery() {
-    const s = "SELECT product_id FROM public.products WHERE product_url = $1;"
-    return s
-}
-
-async function insertProduct(product) {
-    const client = await pool.connect()
-    try {
-        await client.query("BEGIN;")
-        let res
-        let product_id
-        res = await client.query(getProdExistQuery(), [product.product_url])
-        if (res.rowCount > 0) {
-            product_id = res.rows[0].product_id
-        } else {
-            const insertProductText = getInsertProductText()
-            const values = [
-                product.supermercado, 
-                product.product_name, 
-                product.product_url, 
-                product.img_url,
-                product.slug,
-                product.brand
-            ]
-            res = await client.query(insertProductText, values)
-            product_id = res.rows[0].product_id
+/**
+ * Renames the keys of a given object to match a specified database schema.
+ * This operation is performed in place, meaning the original object is modified.
+ * 
+ * @param {Object} entry - The object whose keys are to be renamed.
+ * @param {String} [schema='products'] - The name of the schema to match the object keys against.
+ *                                       Defaults to 'products' if not specified.
+ * 
+ * @example
+ * const product = { name: "Laptop", link: "www.example.com", image: "image.jpg" };
+ * matchDbSchema(product);
+ * // The product object now will be:
+ * {product_name: "Laptop", product_url: "www.example.com", image_url: "image.jpg"}
+ */
+function matchDbSchema(entry) {
+    const dbSchemas = { 
+        name: "product_name",
+        link: "product_url",
+        image: "img_url",
+        price: "list_price",
+        discount: "discounted_price",
+    }
+    for (const [oldKey, newKey] of Object.entries(dbSchemas)) {
+        if (entry.hasOwnProperty(oldKey)) {
+            entry[newKey] = entry[oldKey]
+            delete entry[oldKey]
         }
-        const insertPriceText = getInsertPriceText()
-        await client.query(insertPriceText, [product_id, product.price, product.discount])
-        await client.query("COMMIT;")
-    } catch (err) {
-        client.query("ROLLBACK;")
-        console.error(err.message)
-    } finally {
-        client.release()
     }
 }
 
+class EntryProcessor {
+    constructor(supermercado, dbPool) {
+        this.supermercado = supermercado;
+        this.pool = dbPool
+    }
 
-
-const dirPath = "files/"
-const files = fs.readdirSync(dirPath)
-
-console.log(">>> Begin .json pipeline")
-console.time('>> Time Elapsed Pipeline');
-files.forEach(element => {
-    fs.readFile(dirPath + element, (err, jsonString) => {
-        if (err) {
-            console.error("Error reading file from disk:", err);
-            return;
+    async process(items) {
+        if (items.length === 0) {
+            return
         }
+        console.log('>> Processing', items.length, 'entries');
+        const prodTableCols = [
+            'supermercado', 
+            'product_name',
+            'category',
+            'brand', 
+            'product_url', 
+            'img_url',
+            'slug',
+        ]
+        const priceTableCols= ['product_id','list_price', 'discounted_price']
+        const prodTableFormat = 'INSERT INTO products(%I) VALUES %L ON CONFLICT ON CONSTRAINT name_url DO UPDATE SET img_url = EXCLUDED.img_url RETURNING product_id;' 
+        const priceTableFormat = 'INSERT INTO prices(%I) VALUES %s RETURNING price_id' 
+        const productTableValues = [] 
+        items.map(item => {
+            item["supermercado"] = this.supermercado
+            matchDbSchema(item)
+            productTableValues.push([
+                item.supermercado,
+                item.product_name,
+                item.category,
+                item.brand,
+                item.product_url,
+                item.img_url,
+                item.slug,
+            ])
+        })
+        const productQuery = format(prodTableFormat, prodTableCols, productTableValues)
+        //console.log(productQuery)
         try {
-            const jsonData = JSON.parse(jsonString);
-            const products = Object.values(jsonData).flat()
-            console.log(">> Inserting from ", element, "to DB")
-
-            products.map(p => {
-                insertProduct({
-                    supermercado: element,
-                    product_name: p.name,
-                    product_url: p.link,
-                    img_url: p.image,
-                    slug: p.slug,
-                    brand: null,
-                    price: p.price ? Number(p.price.replace(/,/g, '')): null,
-                    discount: p.discount ? Number(p.discount.replace(/,/g, '')): null
+            const client = await this.pool.connect()
+            try {
+                await client.query('BEGIN')
+                const res = await client.query(productQuery)
+                const prices = []
+                //console.log(res.rows.length)
+                res.rows.forEach((row, i) => {
+                    const product_id = row.product_id
+                    const item = items[i]
+                    prices.push(
+                        format(
+                            '(%L)', 
+                            [
+                                product_id, 
+                                this.convertToNumber(item.list_price), 
+                                this.convertToNumber(item.discounted_price)
+                            ]
+                        )
+                    )
                 })
-            })
+                const pricesQuery = format(priceTableFormat, priceTableCols, prices.join(", "))
+                await client.query(pricesQuery)
+                await client.query('COMMIT;')
+                console.log("Inserted prices", r.rows.length) 
+            } catch (err) {
+                await client.query('ROLLBACK;')
+                throw err
+            } finally {
+                await client.release()
+            }
         } catch (err) {
-            console.error('Error parsing JSON string:', err);
+            console.error('Database operation failed:', err.message);
         }
-    })
-})
-console.log(">>> End .json pipeline")
-console.timeEnd('>> Time Elapsed Pipeline')
+    }
+
+    convertToNumber(str) {
+        if (str === null || str === undefined || str.trim() === '') {
+            return 0
+        }
+        const number = parseFloat(str.replace(/,/g, ''));
+        return isNaN(number) ? 0 : number
+    }
+}
+
+async function main() {
+    
+    if (process.argv.length != 4) {
+        console.error("Missing filepath or supermercado")
+        process.exit(1)
+    }
+    
+    const filePath = process.argv[2]
+    const supermercado = process.argv[3]
+    
+    console.log(">> Processing Items in", filePath,"---", supermercado)
+    console.time('execTime'); // Start timing with a label
+    
+    dotenv.config();
+    let pool
+    try {        
+        
+        pool = new Pool({
+            user: process.env.PGUSER,
+            password: process.env.PGPASSWORD,
+            database: process.env.PGDATABASE,
+            port: process.env.PGPORT,
+            host: process.env.PGHOST,
+        })
+        process.on('SIGINT', async function() {
+            await pool.end()
+            process.exit()
+        })
+        const rawFile = fs.readFileSync(filePath, 'utf-8') 
+        const jsonData = JSON.parse(rawFile)
+        
+        const processor = new EntryProcessor(supermercado, pool)
+        const parsedEndpointPromises = Object.values(jsonData).map(x => processor.process(x))
+        await Promise.all(parsedEndpointPromises)
+
+    } catch (err) {
+        console.error('error', err)
+    } finally {
+        if (pool) {
+            await pool.end()
+        }
+    }
+    console.timeEnd('execTime');
+}
+
+main().catch(error => {
+    console.error('Main function encountered an error:', error);
+    process.exit(1);
+});

@@ -97,7 +97,6 @@ class EntryProcessor {
                 const pricesQuery = format(priceTableFormat, priceTableCols, prices.join(", "))
                 await client.query(pricesQuery)
                 await client.query('COMMIT;')
-                console.log("Inserted prices", r.rows.length) 
             } catch (err) {
                 await client.query('ROLLBACK;')
                 throw err

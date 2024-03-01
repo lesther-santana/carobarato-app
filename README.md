@@ -19,3 +19,19 @@ Replace `main.js` with the path to the main script file, if different.
 
 ## Features
 - Extract product information from supermarket websites.
+
+# DB io
+
+## Description
+
+The io module parses the .json files and inserts them into the PostgreSQL database
+
+## Usage
+
+To run the batch io operation do:
+
+``` bash
+node io/index.js <filepath> <supermarket name>
+```
+
+the filepath can be "files/file.json" and the supermarket name "nacional".

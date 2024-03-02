@@ -22,10 +22,20 @@ const IGNORE_FETCH = [
     'Hogar y Electrodomésticos',
     'Plaguicidas ',
     'Mascotas',
-    'Wala',
     'Zerca',
     'Nuestras Marcas',
     'Bebés',
+    'Cigarrillos',
+    'Belleza',
+    'Cuidado para el Cabello',
+    'Cuidado para la Piel',
+    'Cuidado Personal',
+    'Farmacia',
+    'Limpieza',
+    'Cuidado de la Ropa',
+    'Desechables',
+    'Limpieza del Hogar',
+    'Organización y Decoración'
 ];
 
 const fetchWithPuppeteer = async () => {
@@ -34,7 +44,6 @@ const fetchWithPuppeteer = async () => {
 
         const PAGE_QUERY = `?limit=30&sort=1`;
         let sirenaDictionary = {};
-        let product_data = [];
 
         const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
@@ -60,37 +69,6 @@ const fetchWithPuppeteer = async () => {
             return [];
         }
 
-        const collectProductsInformation = async (category_data) => {
-
-            await page.waitForSelector(`.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product .item-product-title`)
-
-            const products_arr = await page.evaluate(($category_data) => {
-
-                const elements = Array.from([...document.body.querySelectorAll('.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product')], el => {
-                    const price_el = el.querySelector('.item-product-price');
-                    const link = el.children[1].href;
-                    const image = el.children[1].outerHTML.split('&quot;')[1];
-                    const name = el.children[2].children[0].innerText;
-                    const discount = price_el.children.length > 1 ? price_el.children[1].innerText.substring(1) : null;
-                    const price = price_el.children.length > 1 ? price_el.children[0].innerText.substring(1) : price_el.innerText.substring(1);
-                    return { link, image, name, price, discount, ...$category_data, brand: null }
-                });
-
-                return elements
-
-            }, category_data)
-
-            product_data = [...product_data, ...products_arr]
-
-            const nextPageButton = await page.$(`a[aria-label="Next page"]`);
-            if (nextPageButton) {
-                await nextPageButton.click();
-                await page.waitForNavigation({ waitUntil: 'networkidle0' });
-                await collectProductsInformation();
-            }
-
-        }
-
         await page.waitForSelector(`.uk-section h2`, { timeout: 5000 });
 
         const links = (await getLinks(`#sub-categorybar .uk-slider ul.uk-nav li a`)).filter(item => !IGNORE_FETCH.includes(item.label));
@@ -107,6 +85,38 @@ const fetchWithPuppeteer = async () => {
 
                 if (subcategories.length > 0) {
                     for (const category of subcategories) {
+                        let product_data = [];
+
+                        const collectProductsInformation = async (category_data) => {
+
+                            await page.waitForSelector(`.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product .item-product-title`)
+
+                            const products_arr = await page.evaluate(($category_data) => {
+
+                                const elements = Array.from([...document.body.querySelectorAll('.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product')], el => {
+                                    const price_el = el.querySelector('.item-product-price');
+                                    const link = el.children[1].href;
+                                    const image = el.children[1].outerHTML.split('&quot;')[1];
+                                    const name = el.children[2].children[0].innerText;
+                                    const discount = price_el.children.length > 1 ? price_el.children[1].innerText.substring(1) : null;
+                                    const price = price_el.children.length > 1 ? price_el.children[0].innerText.substring(1) : price_el.innerText.substring(1);
+                                    return { link, image, name, price, discount, ...$category_data, brand: null }
+                                });
+
+                                return elements
+
+                            }, category_data)
+
+                            product_data = [...product_data, ...products_arr]
+
+                            const nextPageButton = await page.$(`a[aria-label="Next page"]`);
+                            if (nextPageButton) {
+                                await nextPageButton.click();
+                                await page.waitForNavigation({ waitUntil: 'networkidle0' });
+                                await collectProductsInformation();
+                            }
+
+                        };
 
                         console.log(`>> Fetching for Category ${category.label}`);
 
@@ -117,6 +127,7 @@ const fetchWithPuppeteer = async () => {
                         await collectProductsInformation(category_data);
 
                         const slug = category.link.substring(36);
+
 
                         sirenaDictionary[slug] = product_data;
 

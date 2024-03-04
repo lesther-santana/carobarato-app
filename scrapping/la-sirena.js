@@ -37,12 +37,14 @@ const IGNORE_FETCH = [
     'Limpieza del Hogar',
     'Organización y Decoración'
 ];
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 
 const fetchWithPuppeteer = async () => {
 
     try {
 
-        const PAGE_QUERY = `?limit=60&sort=1`;
+        const PAGE_QUERY = `?limit=80&sort=1`;
         let sirenaDictionary = {};
 
         const browser = await puppeteer.launch({ headless: true });
@@ -84,12 +86,13 @@ const fetchWithPuppeteer = async () => {
                 const subcategories = await getLinks(`.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items li a`)
 
                 if (subcategories.length > 0) {
+
                     for (const category of subcategories) {
                         let product_data = [];
 
                         const collectProductsInformation = async (category_data, page_number) => {
 
-                            console.time(`>> Time Elapsed Fetching ${item.label}`);
+                            console.time(`>>>> Time Elapsed Fetching ${item.label}`);
                             const pagesArray = Array.from(Array(Number(page_number)).keys());
                             const fetchLoop = await pagesArray.map(async (index) => {
 
@@ -100,8 +103,8 @@ const fetchWithPuppeteer = async () => {
                                     // Assuming mouse is not pressed initially
                                     let isMouseDown = false; // Track if the mouse is down
                                     try {
-                                        await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 5000 });
-                                        await page.waitForSelector(selector, { timeout: 5000 });
+                                        await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 2000 });
+                                        await page.waitForSelector(selector, { timeout: 2000 });
 
                                         // Before attempting to release the mouse, check if it was pressed
                                         if (isMouseDown) {
@@ -112,7 +115,8 @@ const fetchWithPuppeteer = async () => {
                                         // Perform the click
                                         await page.click(selector);
                                         // Wait for the necessary selector after clicking
-                                        await page.waitForSelector(`.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product .item-product-title`, { timeout: 5000 });
+                                        await page.waitForSelector(`.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product .item-product-title`, { timeout: 2000 });
+
                                     } catch (error) {
                                         console.error('Error during click operation.');
                                         // Release the mouse if it's down when an error occurs
@@ -129,9 +133,7 @@ const fetchWithPuppeteer = async () => {
                                             // Recursively retry the clickHandler function with a decremented retryCount
                                             await clickHandler(retryCount - 1);
                                         } else {
-                                            console.log('No more retries left.', error);
-                                            // Throw the error after all retries have been exhausted
-                                            throw new Error('clickHandler failed after multiple attempts');
+                                            console.log('No more retries left. ClickHandler failed after multiple attempts');
                                         }
                                     }
                                 };
@@ -141,10 +143,9 @@ const fetchWithPuppeteer = async () => {
                                     try {
                                         await clickHandler();
                                     } catch (error) {
-                                        console.error(`Error during click operation. Page: ${await page.url()}`, error);
+                                        console.error(`Error during click operation. Page: ${await page.url()}`, process.env.ENV !== 'dev' ? error : '');
                                         await page.goto(`${category.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
                                         await clickHandler();
-                                        console.log('Retrying click operation...')
                                     }
 
                                 } else {
@@ -167,24 +168,28 @@ const fetchWithPuppeteer = async () => {
 
                                 }, category_data)
 
-                                console.log('CONCLUSION', { page_number, count: products_arr.length })
+                                console.log('>>> Products fetched per page.', { page_number, count: products_arr.length })
 
-                                product_data = [...product_data, ...products_arr]
 
                                 return products_arr
                             });
 
-                            await Promise.all(fetchLoop);
+                            const results = await Promise.all(fetchLoop);
 
-                            console.timeEnd(`>> Time Elapsed Fetching ${item.label}`);
+                            console.log(`>>>> Final Product Fetch Length:`, results.flat().length)
+
+                            product_data = results.flat()
+
+                            console.timeEnd(`>>>> Time Elapsed Fetching ${item.label}`);
 
 
                         };
 
-                        console.log(`>> Fetching for Category ${category.label}`);
-
                         const category_data = { category: category.label, slug: category.link.split('category')[1] };
+
                         await page.goto(`${category.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
+
+                        console.log(`>> Fetching for Category: ${category.label}`, await page.url());
 
                         await page.waitForSelector(`.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product .item-product-title`)
 
@@ -194,7 +199,7 @@ const fetchWithPuppeteer = async () => {
                             return page_articles_count.innerText;
                         })
 
-                        page_number = (page_number.split(' artículos')[0]) / 60
+                        page_number = (page_number.split(' artículos')[0]) / 80
                         page_number = Math.round(page_number) > page_number ? Math.round(page_number) : Math.round(page_number) + 1
 
                         await collectProductsInformation(category_data, page_number);
@@ -204,12 +209,128 @@ const fetchWithPuppeteer = async () => {
                         const slug = category.link.substring(36);
                         sirenaDictionary[slug] = product_data;
 
-
                     };
                 }
 
             } catch (error) {
-                console.log(`>>>> Selector not found ${item.label}, continuing with other tasks.`, error);
+                console.log('\x1b[31m%s\x1b[0m', `>>>> Selector  ${item.label} doens't have sub categories.`);
+
+                const slug = item.link.substring(36);
+                const category_data = { category: item.label, slug: item.link.split('category')[1] };
+
+                await page.waitForSelector(`.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product .item-product-title`)
+                await page.goto(`${item.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
+                await page.waitForSelector(`.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product .item-product-title`)
+
+                let pages_number = await page.evaluate(() => {
+
+                    const page_articles_count = document.querySelector('div.uk-flex-middle:nth-child(2) > div:nth-child(1) > span:nth-child(1)');
+                    return page_articles_count.innerText;
+                })
+
+                pages_number = (pages_number.split(' artículos')[0]) / 60
+                pages_number = Math.round(pages_number) > pages_number ? Math.round(pages_number) : Math.round(pages_number) + 1
+
+                let product_data = []
+                const collectProductsInformation = async (category_data, page_number) => {
+
+                    console.time(`>>>> Time Elapsed Fetching ${item.label}`);
+                    const pagesArray = Array.from(Array(Number(page_number)).keys());
+                    const fetchLoop = await pagesArray.map(async (index) => {
+
+                        const page_number = index + 1;
+
+                        const clickHandler = async (retryCount = 3) => {
+                            const selector = `.uk-pagination li:nth-child(${page_number}) a`;
+                            // Assuming mouse is not pressed initially
+                            let isMouseDown = false; // Track if the mouse is down
+                            try {
+                                await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 2000 });
+                                await page.waitForSelector(selector, { timeout: 2000 });
+
+                                // Before attempting to release the mouse, check if it was pressed
+                                if (isMouseDown) {
+                                    await page.mouse.up();
+                                    isMouseDown = false; // Reset the mouse state
+                                }
+
+                                // Perform the click
+                                await page.click(selector);
+                                // Wait for the necessary selector after clicking
+                                await page.waitForSelector(`.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product .item-product-title`, { timeout: 2000 });
+
+                            } catch (error) {
+                                console.error('Error during click operation.');
+                                // Release the mouse if it's down when an error occurs
+                                if (isMouseDown) {
+                                    await page.mouse.up();
+                                    isMouseDown = false;
+                                    console.log('Mouse up after error');
+                                }
+
+                                // Retry mechanism
+                                if (retryCount > 0) {
+                                    console.log(`Retrying clickHandler on page ${page_number}, URL: ${await page.url()}. Attempts remaining: ${retryCount}`);
+                                    // Wait a moment before retrying to give the page a chance to settle
+                                    // Recursively retry the clickHandler function with a decremented retryCount
+                                    await clickHandler(retryCount - 1);
+                                } else {
+                                    console.log('No more retries left. ClickHandler failed after multiple attempts');
+                                }
+                            }
+                        };
+
+
+                        if (pagesArray.length > 1 && page_number > 1) {
+                            try {
+                                await clickHandler();
+                            } catch (error) {
+                                console.error(`Error during click operation. Page: ${await page.url()}`, process.env.ENV !== 'dev' ? error : '');
+                                await page.goto(`${item.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
+                                await clickHandler();
+                            }
+
+                        } else {
+                            await page.goto(`${item.link}${PAGE_QUERY}&page=${page_number}`, { waitUntil: 'domcontentloaded' });
+                            await page.waitForSelector(`.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product .item-product-title`, { timeout: 2000 })
+                        }
+
+                        const products_arr = await page.evaluate(($category_data) => {
+                            const elements = Array.from([...document.body.querySelectorAll('.uk-grid.uk-grid-small.uk-grid-match.grid-products .item-product')], el => {
+                                const price_el = el.querySelector('.item-product-price');
+                                const link = el.children[1].href;
+                                const image = el.children[1].outerHTML.split('&quot;')[1];
+                                const name = el.children[2].children[0].innerText;
+                                const discount = price_el.children.length > 1 ? price_el.children[1].innerText.substring(1) : null;
+                                const price = price_el.children.length > 1 ? price_el.children[0].innerText.substring(1) : price_el.innerText.substring(1);
+                                return { link, image, name, price, discount, ...$category_data, brand: null }
+                            });
+
+                            return elements
+
+                        }, category_data)
+
+                        console.log('>>> Products fetched per page.', { page_number, count: products_arr.length })
+
+
+                        return products_arr
+                    });
+
+                    const results = await Promise.all(fetchLoop);
+
+                    console.log(`>>>> Final Product Fetch Length:`, results.flat().length)
+
+                    product_data = results.flat()
+
+                    console.timeEnd(`>>>> Time Elapsed Fetching ${item.label}`);
+
+
+                };
+
+                await collectProductsInformation(category_data, pages_number);
+
+                sirenaDictionary[slug] = product_data;
+
             }
 
         }

@@ -24,18 +24,21 @@ const IGNORE_FETCH = [
     'Mascotas',
     'Zerca',
     'Nuestras Marcas',
-    'Bebés',
-    'Cigarrillos',
+    'Bebés ',
+    'Cigarrillos ',
     'Belleza',
     'Cuidado para el Cabello',
     'Cuidado para la Piel',
     'Cuidado Personal',
-    'Farmacia',
-    'Limpieza',
+    'Farmacia ',
+    'Limpieza ',
     'Cuidado de la Ropa',
     'Desechables',
     'Limpieza del Hogar',
-    'Organización y Decoración'
+    'Organización y Decoración ',
+    'Pañales ',
+    'Wala'
+
 ];
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -81,13 +84,14 @@ const fetchWithPuppeteer = async () => {
             await page.goto(`${item.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
 
             try {
-                await page.waitForSelector('.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items', { timeout: 3000 });
+                await page.waitForSelector('.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items', { timeout: 2500 });
 
                 const subcategories = await getLinks(`.subcat-nav.uk-margin-medium-top .uk-slider .uk-slider-items li a`)
 
                 if (subcategories.length > 0) {
 
                     for (const category of subcategories) {
+
                         let product_data = [];
 
                         const collectProductsInformation = async (category_data, page_number) => {
@@ -178,7 +182,7 @@ const fetchWithPuppeteer = async () => {
 
                             console.log(`>>>> Final Product Fetch Length:`, results.flat().length)
 
-                            product_data = results.flat()
+                            product_data = [...new Map(results.flat().map(item => [item.link, item])).values()]
 
                             console.timeEnd(`>>>> Time Elapsed Fetching ${item.label}`);
 
@@ -187,7 +191,7 @@ const fetchWithPuppeteer = async () => {
 
                         const category_data = { category: category.label, slug: category.link.split('category')[1] };
 
-                        await page.goto(`${category.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded' });
+                        await page.goto(`${category.link}${PAGE_QUERY}&page=1`, { waitUntil: 'domcontentloaded', });
 
                         console.log(`>> Fetching for Category: ${category.label}`, await page.url());
 
@@ -208,12 +212,12 @@ const fetchWithPuppeteer = async () => {
 
                         const slug = category.link.substring(36);
                         sirenaDictionary[slug] = product_data;
+                    }
 
-                    };
                 }
 
             } catch (error) {
-                console.log('\x1b[31m%s\x1b[0m', `>>>> Selector  ${item.label} doens't have sub categories.`);
+                console.log('\x1b[31m%s\x1b[0m', `>>>> Selector  ${item.label} doens't have sub categories.`, error);
 
                 const slug = item.link.substring(36);
                 const category_data = { category: item.label, slug: item.link.split('category')[1] };
@@ -320,7 +324,7 @@ const fetchWithPuppeteer = async () => {
 
                     console.log(`>>>> Final Product Fetch Length:`, results.flat().length)
 
-                    product_data = results.flat()
+                    product_data = [...new Map(results.flat().map(item => [item.link, item])).values()]
 
                     console.timeEnd(`>>>> Time Elapsed Fetching ${item.label}`);
 

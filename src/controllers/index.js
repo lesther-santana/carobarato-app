@@ -5,15 +5,9 @@ export const getProducts = async (req, res) => {
 
     const { search, supermarket } = req.query;
 
-    const ts_search = Sequelize.literal(
-        `product_name_index_col @@ plainto_tsquery('spanish', '${search}')`
+    const ts_search = Sequelize.literal(`similarity(product_name, '${search}') > 0.2`)
 
-    )
-
-    // const rank = Sequelize.literal(
-    //     `ts_rank(product_name_index_col, plainto_tsquery('spanish', '${search}'))`
-
-    // )
+    const rank = Sequelize.literal(`similarity(product_name, '${search}')`)
 
 
     const products = await Product.findAll({
@@ -23,7 +17,7 @@ export const getProducts = async (req, res) => {
             supermercado: { [Op.iLike]: `%${supermarket}%` }
         },
         order: [
-            // [rank, 'DESC']
+            [rank, 'DESC']
         ],
         include: {
             model: Price,

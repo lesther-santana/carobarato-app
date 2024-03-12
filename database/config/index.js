@@ -16,6 +16,7 @@ export default {
       "require": true,
       "rejectUnauthorized": false // For Heroku's self-signed certificate
     }
-  }
+  },
+  "logging": false
 
 }

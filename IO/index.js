@@ -44,6 +44,18 @@ class EntryProcessor {
         if (items.length === 0) {
             return
         }
+        const uniqueLinks = new Set();
+        const uniqueArr = items.filter(obj => {
+            if (!uniqueLinks.has(obj.link)) {
+                uniqueLinks.add(obj.link);
+                return true;
+            }
+            return false;
+        })
+        
+        items = uniqueArr
+
+
         console.log('>> Processing', items.length, 'entries');
         const prodTableCols = [
             'supermercado', 
@@ -55,7 +67,7 @@ class EntryProcessor {
             'slug',
         ]
         const priceTableCols= ['product_id','list_price', 'discounted_price']
-        const prodTableFormat = 'INSERT INTO products(%I) VALUES %L ON CONFLICT ON CONSTRAINT name_url DO UPDATE SET img_url = EXCLUDED.img_url RETURNING product_id;' 
+        const prodTableFormat = 'INSERT INTO products(%I) VALUES %L ON CONFLICT (product_url) DO UPDATE SET img_url = EXCLUDED.img_url RETURNING product_id;' 
         const priceTableFormat = 'INSERT INTO prices(%I) VALUES %s RETURNING price_id' 
         const productTableValues = [] 
         items.map(item => {

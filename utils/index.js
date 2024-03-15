@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import dotenv from "dotenv";
+import axios from 'axios';
 
 dotenv.config();
 
@@ -11,7 +12,7 @@ export const SUPERMARKETS = {
     JUMBO: `https://jumbo.com.do/`
 }
 
-export const writeFile = (supermarket = 'Nacional', report) => {
+export const writeFile = (supermarket = 'Nacional', data) => {
     const filepath = path.join(projectRoot, 'files', supermarket + '.json');
 
     // Check if the directory exists, if not create it
@@ -26,10 +27,10 @@ export const writeFile = (supermarket = 'Nacional', report) => {
                 return;
             }
             console.log('>>>> File deleted for ', supermarket);
-            writeNewFile(filepath, report, supermarket);
+            writeNewFile(filepath, data, supermarket);
         });
     } else {
-        writeNewFile(filepath, report, supermarket);
+        writeNewFile(filepath, data, supermarket);
     }
 };
 
@@ -43,3 +44,18 @@ const writeNewFile = (filepath, report, supermarket) => {
     });
 };
 
+export async function safeRequest( url, retries = 3, delay = 1000, headers = {} ) {
+    let lastError;
+    for (let i = 0; i < retries; i++) {
+        try {
+            return await axios.get(url, { headers });
+        } catch (error) {
+            lastError = error
+            if (error.code === 'ECONNRESET') {
+                //console.log(`Attempt ${i + 1}: Connection reset. Retrying...`);
+                await new Promise(resolve => setTimeout(resolve, delay))
+            }
+        }
+    }
+    throw lastError
+};

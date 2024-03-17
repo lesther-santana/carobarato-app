@@ -17,7 +17,7 @@ export const getProducts = async (req, res) => {
             supermercado: { [Op.iLike]: `%${supermarket}%` }
         },
         order: [
-            // [rank, 'DESC']
+            [rank, 'DESC']
         ],
         include: {
             model: Price,

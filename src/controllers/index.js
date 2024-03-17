@@ -34,10 +34,8 @@ export const getSpecificProduct = async (req, res) => {
     const { supermarket } = req.query;
     const { product } = req.params;
 
-    const ts_search = Sequelize.literal(
-        `product_name_index_col @@ plainto_tsquery('spanish', '${product}')`
-
-    )
+    const ts_search = Sequelize.literal(`product_name % '${product}'`)
+    const rank = Sequelize.literal(`similarity(product_name, '${product}')`)
 
     const products = await Product.findOne({
         limit: 10,
@@ -63,16 +61,17 @@ export const getSpecificProductsArray = async (req, res) => {
     const { search } = req.body;
 
     const products = await Promise.all(search.map(async (p) => {
-        const ts_search = Sequelize.literal(
-            `product_name_index_col @@ plainto_tsquery('spanish', '${p.product}')`
-        )
+
+        const ts_search = Sequelize.literal(`product_name % '${p.product}'`)
+        const rank = Sequelize.literal(`similarity(product_name, '${p.product}')`)
+
         const result = await Product.findOne({
             where: {
                 [Op.and]: ts_search,
                 supermercado: { [Op.iLike]: `%${p.supermarket}%` }
             },
             order: [
-                // [rank, 'DESC']
+                [rank, 'DESC']
             ],
             include: {
                 model: Price,

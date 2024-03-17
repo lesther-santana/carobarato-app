@@ -38,12 +38,6 @@ Product.init(
             allowNull: false,
             defaultValue: DataTypes.NOW,
         },
-        product_name_index_col: {
-            type: DataTypes.VIRTUAL,
-            // Add the actual column name in the database here:
-            field: 'product_name_index_col'
-        },
-
     },
     {
         sequelize, // We need to pass the connection instance

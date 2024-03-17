@@ -5,7 +5,7 @@ export const getProducts = async (req, res) => {
 
     const { search, supermarket } = req.query;
 
-    const ts_search = Sequelize.literal(`similarity(product_name, '${search}') > 0.2`)
+    const ts_search = Sequelize.literal(`product_name % '${search}'`)
 
     const rank = Sequelize.literal(`similarity(product_name, '${search}')`)
 

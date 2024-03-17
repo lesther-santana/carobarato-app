@@ -1,78 +1,94 @@
 import axios from 'axios';
-import { writeFile, SUPERMARKETS, safeRequest } from '../utils/index.js';
+import axiosRetry from 'axios-retry';
+import { writeFile } from '../utils/index.js';
 import { load } from 'cheerio';
 import url from 'url';
 
-const headers = {
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Accept-Language": "en-US,en;q=0.5",
-    "Connection": "keep-alive",
-    "Host": "www.pricesmart.com",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "same-origin",
-    "Sec-Fetch-User": "?1",
-    "Upgrade-Insecure-Requests": "1",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0"
-};
+const ROOT_URL = 'https://www.pricesmart.com/site/do/es'
 
+const retryOptions = {
+    retries: 3, // Number of retry attempts
+    retryDelay: axiosRetry.exponentialDelay,
+    retryCondition: axiosRetry.isRetryableError,
+  };
+  
+axiosRetry(axios, retryOptions);
 
+async function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
+async function processCategory(relCategoryURL) {
 
-async function process(categoryURL, rootURL) {
     try {
-        const response = await axios.get(categoryURL, {headers})
-        const html = response.data  
-        const $ = load(html)
-        const $products = $('div.search-product-box')
-        const products = []
-        $products.each((i, element) => {
-            const link = url.resolve(rootURL, $(element).find('a[id^="search-result"]').attr('href'));
-            const image = $(element).find('img').attr('src');
-            const name = $(element).find('p#product-name').text().trim();
-            const price = $(element).find('strong#product-price').text().trim();
-            const discount = null;
-            const product = {name, link, image, price, discount}
-            products.push(product)
-        });       
-        return products
+
+        const categoryURL = url.resolve(ROOT_URL, relCategoryURL);
+        const asURL = new URL(relCategoryURL, ROOT_URL)
+        let page_n = 1;
+        const products = [];
+
+        while (true) {
+            const paginated_url = categoryURL + '&' + `r133_r1_r3_r1:page=${page_n}` + '&' + '133_r1_r3_r1:_sps=12';
+            console.log('>>> Processing ', paginated_url)
+            const response = await axios.get(paginated_url);
+            const html = response.data;  
+            const $ = load(html);
+            const $products = $('div.search-product-box');
+
+            if ($products.length === 0) {
+                break
+            }
+            
+            $products.each((i, element) => {
+                const link = url.resolve(ROOT_URL, $(element).find('a[id^="search-result"]').attr('href'));
+                const image = $(element).find('img').attr('src');
+                const name = $(element).find('p#product-name').text().trim();
+                const price = $(element).find('strong#product-price').text().trim();
+                const discount = null;
+                const category = $(element).find('span#category_banner_title').text().trim();
+                const slug = asURL.pathname.toString();
+                products.push({name, link, image, price, discount, category, slug});
+            });
+            
+            page_n++;
+        }
+
+        console.log(`>>> Done with ${categoryURL} found ${products.length} items`)
+        return {[relCategoryURL]: products}
+
     } catch (error) {
-        console.log(error)
-        return []
+        console.log(error.messagge)
+        return {[relCategoryURL]: []}
     }
 }
 
 async function main() {
 
-    const rootURL = "https://www.pricesmart.com/site/do/es";
-
-    console.log(">>> Scrapping from Pricesmart Starting");
-    console.log(">>> Getting html from", rootURL);
+    console.log(">> Getting html from", ROOT_URL);
     console.time('execTime');
     
     try {
-        const response =  await axios.get(rootURL, headers)
+        const response =  await axios.get(ROOT_URL)
         
         const $ = load(response.data);
         const links = $('a[href]:not([href=""]).categories-section-link');
-        const catalog = {}
-
+        
+        console.log(`>> Found ${links.length} categories`);
+        
+        const promises = [];
+        
         for (const link of links) {
-            const href = $(link).attr('href');
-            catalog[href] = await process(url.resolve(rootURL, href), rootURL)
+            const href = $(link).attr('href'); 
+            promises.push(processCategory(href));
         }
-
-        writeFile('pricesmart', catalog)
-
+        
+        const categories = await Promise.all(promises)
+        writeFile('pricesmart', Object.assign({}, ...categories))
+        console.log('>>> Done!')
     } catch (error) {
-
         console.log(error)
-
     }
-    console.log('>>> Done!')
     console.timeEnd('execTime');
-
 }
 
 main()

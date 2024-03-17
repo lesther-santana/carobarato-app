@@ -115,8 +115,8 @@ class EntryProcessor {
             } finally {
                 await client.release()
             }
-        } catch (err) {
-            console.error('Database operation failed:', err.message);
+        } catch (error) {
+            console.error('Database operation failed:', error);
         }
     }
 
@@ -125,7 +125,7 @@ class EntryProcessor {
             return 0
         }
         const number = parseFloat(str.replace(/,/g, ''));
-        return isNaN(number) ? 0 : number
+        return isNaN(number) ? 0 : Math.round(number, 2)
     }
 }
 

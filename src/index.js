@@ -41,7 +41,7 @@ const corsOptions = {
 
 // Custom middleware to handle CORS errors
 const handleCorsError = (req, res, next) => {
-    if (!corsOptions.origin || corsOptions.origin === '*' || corsOptions.origin === req.headers.origin) {
+    if (!corsOptions.origin || corsOptions.origin === '*' || corsOptions.origin.includes(req.headers.origin)) {
         next();
     } else {
 

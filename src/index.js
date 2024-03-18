@@ -37,8 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const corsOptions = {
-    origin: 'https://carobarato.com', // Replace with your frontend origin
-    // origin: process.env.ENV === 'prod' ? 'https://carobarato.com' : '*', // Replace with your frontend origin
+    origin: process.env.ENV === 'prod' ? ['https://carobarato.com', 'https://www.carobarato.com'] : '*', // Replace with your frontend origin
     optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 

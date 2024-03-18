@@ -68,14 +68,3 @@ findAvailablePort(port)
     .catch((err) => {
         console.error('Error finding available port:', err)
     })
-
-
-// sequelize.authenticate()
-//     .then(() => {
-//         console.log('Connection to the database has been established successfully.');
-//         app.listen(port, () => console.log(`App listening on port 4000`));
-//     })
-//     .catch(err => {
-//         console.error('Unable to connect to the database:', err);
-//     });
-

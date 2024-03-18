@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer';
 import { writeFile, SUPERMARKETS } from '../utils/index.js';
 import { safeRequest } from '../scraping.js';
+import { getProxies } from '../utils/proxy-rotator.js';
 import { load } from 'cheerio';
 import fs from 'fs';
 import path from 'path';
@@ -12,7 +13,7 @@ const headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
     'Accept-Language': 'en-US,en;q=0.5',
     'Accept-Encoding': 'gzip, deflate, br',
-    'Referer': 'https://jumbo.com.do/',
+    'Referer': SUPERMARKETS.JUMBO,
     'Connection': 'keep-alive',
     'Upgrade-Insecure-Requests': '1',
     'Sec-Fetch-Dest': 'document',
@@ -23,13 +24,15 @@ const headers = {
     'Cache-Control': 'no-cache'
 };
 
-const fetchProductsCategories = async () => {
+const fetchProductsCategories = async (proxies) => {
     try {
         // Fetch the HTML content of the webpage
-        const response = await safeRequest({ url: SUPERMARKETS.JUMBO, headers });
-        const html = response.data;
+        const response = await safeRequest({ url: SUPERMARKETS.JUMBO, proxies });
+        console.log('>> Fetched', response);
+        const html = response;
         const $ = load(html);
         const routes_array = []
+
 
         console.log('> 1. Began fetching data from Jumbo');
 
@@ -87,27 +90,6 @@ const produceProductsCatalogue = (html, link, label) => {
 
 };
 
-// const joinJsonFiles = () => {
-
-//     const filePath = path.join(projectRoot, 'files');
-//     console.log('Joining json files...', filePath);
-//     const files = fs.readdirSync(filePath).filter(file => file.startsWith('jumbo-') && file.endsWith('.json'));
-
-//     console.log('Found', files.length, 'files');
-//     const mergedData = files.reduce((acc, file) => {
-//         const fullFilePath = path.join(filePath, file);
-//         const file_cat = fullFilePath.split('jumbo-')[1].split('.json')[0].replace(/\s+/g, '-')
-//         const data = JSON.parse(fs.readFileSync(fullFilePath, 'utf8'));
-//         fs.unlinkSync(fullFilePath);
-//         return data.length > 0 ? { ...acc, [file_cat]: data } : acc;
-//     }, {});
-
-
-//     fs.writeFileSync('files/jumbo.json', JSON.stringify(mergedData));
-//     console.log(`> 5. Finished writting file`);
-
-// };
-
 
 const joinJsonFiles = () => {
     const filePath = path.join(projectRoot, 'files');
@@ -138,11 +120,15 @@ const joinJsonFiles = () => {
     console.log(`> 5. Finished writing file`);
 };
 const buildCatalog = async () => {
-    const jumboRoutes = await fetchProductsCategories();
 
-    console.log('> 3. Started data fetch');
+    const proxies = await getProxies();
+
+    const jumboRoutes = await fetchProductsCategories(proxies);
+
+    console.log('> 3. Started data fetch', jumboRoutes);
     console.time('>> Time Elapsed Fetching');
 
+    return;
     await Promise.all(jumboRoutes.map(async (parent, index) => {
         let category = parent.routes[0].link.split('/');
         category = category[category.length - 1].split('.')[0];
@@ -154,7 +140,7 @@ const buildCatalog = async () => {
             if (['Frutas Frescas', 'Hortalizas', 'Viveres'].includes(route.label)) {
                 console.log('>> Skipped', route.link, route.label)
             }
-            const url = route.link + '?product_list_limit=50';
+            const url = `https://webcache.googleusercontent.com/search?q=cache:` + route.link;
             const response = await safeRequest({ url, headers });
 
             console.log(`>> Fetched for ${route.label} | Page 1`);
@@ -166,8 +152,9 @@ const buildCatalog = async () => {
             const $ = load(html);
 
             const article_count = $('.total_items').text().split(' ')[0];
-            let page_count = article_count / 50;
+            let page_count = article_count / 15;
             page_count = page_count > parseInt(page_count) ? parseInt(page_count) + 1 : parseInt(page_count);
+
 
             let array_of_products = [];
 
@@ -182,7 +169,7 @@ const buildCatalog = async () => {
                     try {
                         console.time(`>> Fetched for ${route.label} | Page ${page}`);
 
-                        const html = (await safeRequest({ url: url + `?product_list_limit=50&p=${page}&random=${Math.random()}`, headers })).data;
+                        const html = (await safeRequest({ url: url + `?p=${page}&random=${Math.random()}`, headers })).data;
                         const products = produceProductsCatalogue(html, route.link, route.label);
 
                         console.timeEnd(`>> Fetched for ${route.label} | Page ${page}`);
@@ -195,13 +182,23 @@ const buildCatalog = async () => {
 
                         page++;
 
-                        // await new Promise(resolve => setTimeout(resolve, 1000));
+                        await new Promise(resolve => setTimeout(resolve, 1000));
 
                     } catch (error) {
-                        console.error("Cannot get data from", url.toString(), error);
-
+                        if (error.response) {
+                            // The request was made and the server responded with a status code
+                            // that falls out of the range of 2xx
+                            console.error("Error Status Code:", error.response.status);
+                        } else if (error.request) {
+                            // The request was made but no response was received
+                            console.error("The request was made but no response was received");
+                        } else {
+                            // Something happened in setting up the request that triggered an Error
+                            // console.error("Error", error.message);
+                        }
                         break;
                     }
+
                 }
             }
 

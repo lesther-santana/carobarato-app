@@ -1,23 +1,8 @@
 import * as cheerio from 'cheerio'
 import axios from 'axios';
 import dotenv from "dotenv";
-
+import puppeteer from 'puppeteer';
 dotenv.config();
-
-const headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-    'Accept-Language': 'en-US,en;q=0.5',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'Connection': 'keep-alive',
-    'Upgrade-Insecure-Requests': '1',
-    'Sec-Fetch-Dest': 'document',
-    'Sec-Fetch-Mode': 'navigate',
-    'Sec-Fetch-Site': 'same-origin',
-    'Pragma': 'no-cache',
-    'Cache-Control': 'no-cache'
-};
-
 
 function getEndpoints($) {
     const links = []
@@ -89,11 +74,44 @@ async function parseEndpoint(endpoint) {
 }
 
 
-export async function safeRequest({ url, retries = 3, delay = 1000, headers = {} }) {
+export async function safeRequest({ url, retries = 3, delay = 2000, proxies }) {
     let lastError;
     for (let i = 0; i < retries; i++) {
         try {
-            return await axios.get(url, { headers });
+
+            let randomIndex = Math.floor(Math.random() * proxies.ip_addresses.length);
+            const ip = proxies.ip_addresses[randomIndex];
+            randomIndex = Math.floor(Math.random() * proxies.port_numbers.length);
+            const port_number = proxies.port_numbers[randomIndex];
+
+
+            const proxy = `--proxy-server=${ip}:${port_number}`;
+
+            console.log({ proxy })
+            // return await axios.get(url, { headers, proxy: proxyConfig });
+            const browser = await puppeteer.launch({
+                // args: [proxy],
+                headless: false // Set false if you want to see the browser
+            });
+
+            const page = await browser.newPage();
+
+            await page.setExtraHTTPHeaders({
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5'
+            });
+
+            // Navigate to the URL
+            const response = await page.goto(url, { waitUntil: 'networkidle2' });
+
+            if (response.status() === 200) {
+                const content = await page.content();
+                await browser.close();
+                return content;
+            } else {
+                throw new Error(`Request failed with status ${response.status()}`);
+            }
         } catch (error) {
             lastError = error
             if (error.code === 'ECONNRESET') {

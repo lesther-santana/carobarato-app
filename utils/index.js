@@ -9,14 +9,14 @@ const projectRoot = process.cwd();
 
 export const SUPERMARKETS = {
     SIRENA: 'https://sirena.do/',
-    JUMBO: `https://jumbo.com.do/`
+    JUMBO: `https://webcache.googleusercontent.com/search?q=cache:https://jumbo.com.do/`
 }
 
 export const writeFile = (supermarket = 'Nacional', data) => {
     const filepath = path.join(projectRoot, 'files', supermarket + '.json');
 
     // Check if the directory exists, if not create it
-    if (!fs.existsSync("files")){
+    if (!fs.existsSync("files")) {
         fs.mkdirSync("files", { recursive: true });
     }
 
@@ -44,7 +44,7 @@ const writeNewFile = (filepath, report, supermarket) => {
     });
 };
 
-export async function safeRequest( url, retries = 3, delay = 1000, headers = {} ) {
+export async function safeRequest(url, retries = 3, delay = 2000, headers = {}) {
     let lastError;
     for (let i = 0; i < retries; i++) {
         try {

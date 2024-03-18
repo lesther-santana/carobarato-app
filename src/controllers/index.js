@@ -78,40 +78,7 @@ export const getSpecificProductsArray = async (req, res) => {
                 as: 'prices'
             }
         });
-
-        console.log(result.product_name)
-
         return result;
     }))
     return res.status(200).json(products)
 };
-
-// Camaron
-// Sirena
-// CAMARON CRUDO WALA 21/25
-// Nacional
-// Cola De Camarón Crudo 16/20 Congelada, Lb
-// Jumbo
-// Camarón Crudo 16/20 Líder 1 Lb
-// PriceSmart
-// Vima Camarón Crudo Congelado 21-25 Bolsa 1 kg / 2.2 lb
-
-
-// Platanos
-// PriceSmart
-// Member's Selection Plátano Verde 8 Unidades
-// Sirena
-// PLATANO VERDE UND
-// Jumbo
-// Plátano Verde
-// Nacional
-// Platano Verde
-
-
-// Romo
-// Sirena
-// RON XV RESERVA BRUGAL 700 ML
-// Nacional / Jumbo
-// Ron Xv Brugal 70 Cl
-// PriceSmart
-// Brugal Ron Reserva Especial XV en Botella de 700 ml

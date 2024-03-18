@@ -14,8 +14,6 @@ const app = express();
 
 let port = process.env.PORT || 4000;
 
-
-
 const findAvailablePort = (port) => {
     const server = net.createServer()
     return new Promise((resolve, reject) => {
@@ -39,15 +37,13 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const corsOptions = {
-    origin: '*', // Replace with your frontend origin
+    origin: process.env.ENV === 'prod' ? 'https://carobarato.com' : '*', // Replace with your frontend origin
     optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 
 app.use(router);
-
-
 
 // Usage
 findAvailablePort(port)

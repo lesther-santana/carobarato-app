@@ -30,18 +30,26 @@ const findAvailablePort = (port) => {
             })
         })
     })
-}
-console.log('CORS SETUP', {
-    CORS: process.env.ENV === 'prod' ? 'https://www.carobarato.com' : '*',
-    isProd: process.env.ENV === 'prod'
-})
-const corsOptions = {
-    // origin: process.env.ENV === 'prod' ? ['https://carobarato.com', 'https://www.carobarato.com'] : '*', // Replace with your frontend origin
-    origin: ['https://carobarato.com', 'https://www.carobarato.com'], // Replace with your frontend origin
-    methods: ['GET', 'POST'],
-    optionsSuccessStatus: 200,
 };
-app.use(cors(corsOptions));
+
+const corsOptions = {
+    origin: process.env.ENV === 'prod' ? ['https://carobarato.com', 'https://www.carobarato.com'] : '*',
+    optionsSuccessStatus: 200,
+    methods: ['GET', 'POST'],
+};
+
+
+// Custom middleware to handle CORS errors
+const handleCorsError = (req, res, next) => {
+    if (!corsOptions.origin || corsOptions.origin === '*' || corsOptions.origin === req.headers.origin) {
+        next();
+    } else {
+        res.status(403).send('Origin not allowed');
+    }
+};
+
+app.use(handleCorsError);
+app.use(cors(corsOptions))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(router);

@@ -30,26 +30,33 @@ const findAvailablePort = (port) => {
             })
         })
     })
-}
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-
-const corsOptions = {
-    origin: process.env.ENV === 'prod' ? ['https://carobarato.com', 'https://www.carobarato.com'] : '*', // Replace with your frontend origin
-    optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
-app.use(cors(corsOptions));
+const corsOptions = {
+    origin: process.env.ENV === 'prod' ? ['https://carobarato.com', 'https://www.carobarato.com'] : '*',
+    optionsSuccessStatus: 200,
+    methods: ['GET', 'POST'],
+};
 
+
+// Custom middleware to handle CORS errors
+const handleCorsError = (req, res, next) => {
+    if (!corsOptions.origin || corsOptions.origin === '*' || corsOptions.origin === req.headers.origin) {
+        next();
+    } else {
+        res.status(403).send('Origin not allowed');
+    }
+};
+
+app.use(handleCorsError);
+app.use(cors(corsOptions))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(router);
 
 // Usage
 findAvailablePort(port)
     .then((availablePort) => {
-
-
         sequelize.authenticate()
             .then(() => {
 
@@ -63,7 +70,6 @@ findAvailablePort(port)
             .catch(err => {
                 console.error('Unable to connect to the database:', err);
             });
-
     })
     .catch((err) => {
         console.error('Error finding available port:', err)

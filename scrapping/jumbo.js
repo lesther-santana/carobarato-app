@@ -2,6 +2,10 @@ import puppeteer from 'puppeteer';
 import { writeFile, SUPERMARKETS } from '../utils/index.js';
 import { safeRequest } from '../scraping.js';
 import { load } from 'cheerio';
+import fs from 'fs';
+import path from 'path';
+
+const projectRoot = process.cwd();
 
 const headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:121.0) Gecko/20100101 Firefox/121.0',
@@ -18,6 +22,7 @@ const headers = {
     'Pragma': 'no-cache',
     'Cache-Control': 'no-cache'
 };
+
 const fetchProductsCategories = async () => {
     try {
         // Fetch the HTML content of the webpage
@@ -82,10 +87,58 @@ const produceProductsCatalogue = (html, link, label) => {
 
 };
 
+// const joinJsonFiles = () => {
 
-(async () => {
+//     const filePath = path.join(projectRoot, 'files');
+//     console.log('Joining json files...', filePath);
+//     const files = fs.readdirSync(filePath).filter(file => file.startsWith('jumbo-') && file.endsWith('.json'));
+
+//     console.log('Found', files.length, 'files');
+//     const mergedData = files.reduce((acc, file) => {
+//         const fullFilePath = path.join(filePath, file);
+//         const file_cat = fullFilePath.split('jumbo-')[1].split('.json')[0].replace(/\s+/g, '-')
+//         const data = JSON.parse(fs.readFileSync(fullFilePath, 'utf8'));
+//         fs.unlinkSync(fullFilePath);
+//         return data.length > 0 ? { ...acc, [file_cat]: data } : acc;
+//     }, {});
+
+
+//     fs.writeFileSync('files/jumbo.json', JSON.stringify(mergedData));
+//     console.log(`> 5. Finished writting file`);
+
+// };
+
+
+const joinJsonFiles = () => {
+    const filePath = path.join(projectRoot, 'files');
+    console.log('Joining json files...', filePath);
+    const files = fs.readdirSync(filePath).filter(file => file.startsWith('jumbo-') && file.endsWith('.json'));
+
+    console.log('Found', files.length, 'files');
+    const mergedData = {};
+
+    files.forEach(file => {
+        const fullFilePath = path.join(filePath, file);
+        try {
+            const file_cat = fullFilePath.split('jumbo-')[1].split('.json')[0].replace(/\s+/g, '-');
+            const data = JSON.parse(fs.readFileSync(fullFilePath, 'utf8'));
+
+            if (Array.isArray(data) && data.length > 0) {
+                mergedData[file_cat] = data;
+                fs.unlinkSync(fullFilePath);
+            } else {
+                console.error('Invalid JSON data in file:', file);
+            }
+        } catch (error) {
+            console.error('Error parsing JSON in file:', file, error);
+        }
+    });
+
+    fs.writeFileSync('files/jumbo.json', JSON.stringify(mergedData));
+    console.log(`> 5. Finished writing file`);
+};
+const buildCatalog = async () => {
     const jumboRoutes = await fetchProductsCategories();
-    let catalogue = {};
 
     console.log('> 3. Started data fetch');
     console.time('>> Time Elapsed Fetching');
@@ -97,6 +150,10 @@ const produceProductsCatalogue = (html, link, label) => {
         console.log(`> 3.${index + 1} Started fetch for parent category ${parent.label}`);
 
         await Promise.all(parent.routes.map(async (route) => {
+
+            if (['Frutas Frescas', 'Hortalizas', 'Viveres'].includes(route.label)) {
+                console.log('>> Skipped', route.link, route.label)
+            }
             const url = route.link + '?product_list_limit=50';
             const response = await safeRequest({ url, headers });
 
@@ -104,14 +161,19 @@ const produceProductsCatalogue = (html, link, label) => {
 
             const html = response.data;
             const products = produceProductsCatalogue(html, route.link, route.label);
+
+
             const $ = load(html);
 
             const article_count = $('.total_items').text().split(' ')[0];
-            let page_count = article_count / 15;
+            let page_count = article_count / 50;
             page_count = page_count > parseInt(page_count) ? parseInt(page_count) + 1 : parseInt(page_count);
 
-            catalogue[category] = [];
-            catalogue[category].push(...products);
+            let array_of_products = [];
+
+            array_of_products.push(...products);
+
+
 
             if (page_count > 1) {
                 let page = 2;
@@ -120,14 +182,16 @@ const produceProductsCatalogue = (html, link, label) => {
                     try {
                         console.time(`>> Fetched for ${route.label} | Page ${page}`);
 
-                        const html = (await safeRequest({ url: url + `?product_list_limit=50&p=${page}`, headers })).data;
+                        const html = (await safeRequest({ url: url + `?product_list_limit=50&p=${page}&random=${Math.random()}`, headers })).data;
                         const products = produceProductsCatalogue(html, route.link, route.label);
 
                         console.timeEnd(`>> Fetched for ${route.label} | Page ${page}`);
 
-                        catalogue[category].push(...products);
+                        array_of_products.push(...products);
 
-                        if (page === page_count) break;
+                        if (page === page_count || products.length === 0) {
+                            break;
+                        }
 
                         page++;
 
@@ -135,14 +199,25 @@ const produceProductsCatalogue = (html, link, label) => {
 
                     } catch (error) {
                         console.error("Cannot get data from", url.toString(), error);
+
                         break;
                     }
                 }
             }
+
+            const subcategory = route.label.toLowerCase().replace(' ', '-');
+
+            if (array_of_products.length > 0) {
+                writeFile('jumbo-' + subcategory, array_of_products);
+
+            }
+
+
         }));
     }));
 
     console.log(`> 4. Data fetching ended successfully`);
     console.timeEnd('>> Time Elapsed Fetching');
-    writeFile('jumbo', catalogue);
-})();
+};
+
+buildCatalog().then(() => setTimeout(() => joinJsonFiles(), 5000))

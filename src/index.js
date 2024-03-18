@@ -44,6 +44,8 @@ const handleCorsError = (req, res, next) => {
     if (!corsOptions.origin || corsOptions.origin === '*' || corsOptions.origin === req.headers.origin) {
         next();
     } else {
+
+        console.log('REJECTED ORIGIN', req.headers.origin)
         res.status(403).send('Origin not allowed');
     }
 };
